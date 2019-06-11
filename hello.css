@@ -2,10 +2,17 @@ body { background-color: purple; }
 
 div { background-color: hotpink; }
 
+.mainlogo{
+  padding: 50px;
+  background-color: purple;
+}
 .second {
+  display: flex;
+  flex-direction: column;
   background-color: darkorange;
   color: white;
   padding: 10px;
+
 }
 .center {
   display: block;
@@ -15,12 +22,14 @@ div { background-color: hotpink; }
 }
 
 .outer {
+
   padding: 30px;
   margin: 55px;
 }
 .inner {
-  padding: 10px;
+  padding: 15px;
   color: white;
+  background-color: hotpink;
 }
 .header {
   margin: 20px;
