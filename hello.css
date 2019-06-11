@@ -1,0 +1,27 @@
+body { background-color: purple; }
+
+div { background-color: hotpink; }
+
+.second {
+  background-color: darkorange;
+  color: white;
+  padding: 10px;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.outer {
+  padding: 30px;
+  margin: 55px;
+}
+.inner {
+  padding: 10px;
+  color: white;
+}
+.header {
+  margin: 20px;
+}
