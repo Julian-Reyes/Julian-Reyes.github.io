@@ -27,6 +27,10 @@ div { background-color: hotpink; }
   margin: 55px;
 }
 .inner {
+  display: flex;
+  flex-direction: row;
+  flex-grow: (1, 2, 3, 4);
+  flex-shrink: 1;
   padding: 15px;
   color: white;
   background-color: hotpink;
