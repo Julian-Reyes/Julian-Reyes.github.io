@@ -1,0 +1,28 @@
+.navbar-header:hover {
+color: red;
+}
+body{
+  padding: 70px;
+  /* background-image: url(007squirtle.png);
+  background-size: cover; */
+
+}
+
+p:hover{
+  /* color: red; */
+}
+
+.nav .navbarinverse:hover{
+  color:red;
+}
+.navbar-inverse li:hover{
+  color: red;
+}
+.col-xs-7{
+  height: 500px;
+}
+
+.right{
+  text-align: center;
+  padding-left: 5%;
+}

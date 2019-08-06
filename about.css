@@ -1,0 +1,21 @@
+body{
+
+  text-align: center;
+}
+
+h1{
+
+  padding-top: 7%;
+  color: red;
+}
+.container{
+  width: 60%;
+}
+
+hr{
+  padding-bottom: 2%;
+}
+
+p{
+  padding-bottom: 4%;
+}

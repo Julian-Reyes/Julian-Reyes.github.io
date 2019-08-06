@@ -1,0 +1,47 @@
+.main{
+display: flex;
+flex-direction: row;
+/* justify-content: center; */
+align-items: center;
+}
+
+.main2{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: end;
+  padding-left: 335px;
+}
+
+.main3{
+  padding-left: 140px;
+}
+.main4{
+  padding-left: 140px;
+}
+.mainJDM{
+  padding-left: 337px;
+}
+.maingame{
+  padding-left: 215px;
+}
+.main1{
+  padding-left: 260px;
+}
+.mainmusic{
+  padding-left: 162px;
+}
+.main5{
+  padding-left: 153px;
+}
+.main10{
+  padding-left: 318px;
+}
+
+.jumbotron{
+  margin-top: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}

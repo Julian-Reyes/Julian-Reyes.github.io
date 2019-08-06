@@ -1,0 +1,11 @@
+body{
+padding: 70px;
+}
+
+.container {
+  color: #2c3e50;
+}
+
+.navbar-inverse {
+    background: #2c3e50;
+}

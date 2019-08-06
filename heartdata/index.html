@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Heart Disease</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Quattrocento+Sans:400,700|Quattrocento:700"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <!-- D3 -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="panel-left">
+        <select
+          name="categorical-factor-select"
+          id="bubble-chart-dropdown"
+        ></select>
+        <svg id="bubble-chart"></svg>
+      </div>
+      <div class="panel-middle">
+        <div>
+          <h1 class="title">Heart Disease Factors</h1>
+        </div>
+        <div>
+          <svg id="donut-chart"></svg>
+        </div>
+        <div id="count-summary"></div>
+        <div class="introduction">
+          <h2 class="introduction-section-title">
+            Categorical Factors
+          </h2>
+          <p>
+            Use the dropdown menu to switch categorical factor. Click a factor
+            option label in the chart to toggle the filter option.
+          </p>
+          <h2 class="introduction-section-title">
+            Numerical Factors
+          </h2>
+          <p>
+            Resize the brush band in the chart to adjust factor filter range.
+          </p>
+          <p>
+            The reset filters button below will reset all filters applied to
+            factors.
+          </p>
+        </div>
+        <div>
+          <button id="reset-filters">Reset Filters</button>
+        </div>
+      </div>
+      <div class="panel-right">
+        <svg id="parallel-coordinates"></svg>
+      </div>
+    </div>
+    <div id="tooltip"></div>
+    <script src="main.js"></script>
+  </body>
+</html>
