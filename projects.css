@@ -5,6 +5,14 @@ flex-direction: row;
 align-items: center;
 }
 
+.main77{
+display: flex;
+flex-direction: row;
+/* justify-content: center; */
+align-items: center;
+margin-right: 150px;
+}
+
 .main2{
   display: flex;
   flex-direction: column;

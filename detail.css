@@ -2,15 +2,24 @@
 color: red;
 }
 body{
-  padding: 70px;
-  /* background-image: url(007squirtle.png);
-  background-size: cover; */
+  padding-top: 60px;
+
+   
+  background-size: cover;
+  background-image: url(vb4.webp);
+  background-repeat: no-repeat;
+
+background-size: 1600px;
+color: #cc0000;
+background-color: lightblue;
 
 }
 
-p:hover{
-  /* color: red; */
-}
+textarea { vertical-align: top;}
+
+/* p:hover{
+   color: red;
+} */
 
 .nav .navbarinverse:hover{
   color:red;
