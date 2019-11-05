@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="beatmaker.css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.js" ></script>
+    <script type="text/javascript" src="paper-full.min.js"></script>
+    <script type="text/paperscript" canvas="myCanvas">
+    //
+    // var values = {
+    // 	friction: 0.8,
+    // 	timeStep: 0.01,
+    // 	amount: 15,
+    // 	mass: 2,
+    // 	count: 0
+    // };
+    // values.invMass = 1 / values.mass;
+    //
+    // var path, springs;
+    // var size = view.size * [1.2, 1];
+    //
+    // var Spring = function(a, b, strength, restLength) {
+    // 	this.a = a;
+    // 	this.b = b;
+    // 	this.restLength = restLength || 80;
+    // 	this.strength = strength ? strength : 0.55;
+    // 	this.mamb = values.invMass * values.invMass;
+    // };
+    //
+    // Spring.prototype.update = function() {
+    // 	var delta = this.b - this.a;
+    // 	var dist = delta.length;
+    // 	var normDistStrength = (dist - this.restLength) /
+    // 			(dist * this.mamb) * this.strength;
+    // 	delta.y *= normDistStrength * values.invMass * 0.2;
+    // 	if (!this.a.fixed)
+    // 		this.a.y += delta.y;
+    // 	if (!this.b.fixed)
+    // 		this.b.y -= delta.y;
+    // };
+    //
+    //
+    // function createPath(strength) {
+    // 	var path = new Path({
+    // 		fillColor: 'blue'
+    // 	});
+    // 	springs = [];
+    // 	for (var i = 0; i <= values.amount; i++) {
+    // 		var segment = path.add(new Point(i / values.amount, 0.5) * size);
+    // 		var point = segment.point;
+    // 		if (i == 0 || i == values.amount)
+    // 			point.y += size.height;
+    // 		point.px = point.x;
+    // 		point.py = point.y;
+    // 		// The first two and last two points are fixed:
+    // 		point.fixed = i < 2 || i > values.amount - 2;
+    // 		if (i > 0) {
+    // 			var spring = new Spring(segment.previous.point, point, strength);
+    // 			springs.push(spring);
+    // 		}
+    // 	}
+    // 	path.position.x -= size.width / 4;
+    // 	return path;
+    // }
+    //
+    // function onResize() {
+    // 	if (path)
+    // 		path.remove();
+    // 	size = view.bounds.size * [2, 1];
+    // 	path = createPath(0.1);
+    // }
+    //
+    // function onMouseMove(event) {
+    // 	var location = path.getNearestLocation(event.point);
+    // 	var segment = location.segment;
+    // 	var point = segment.point;
+    //
+    // 	if (!point.fixed && location.distance < size.height / 4) {
+    // 		var y = event.point.y;
+    // 		point.y += (y - point.y) / 6;
+    // 		if (segment.previous && !segment.previous.fixed) {
+    // 			var previous = segment.previous.point;
+    // 			previous.y += (y - previous.y) / 24;
+    // 		}
+    // 		if (segment.next && !segment.next.fixed) {
+    // 			var next = segment.next.point;
+    // 			next.y += (y - next.y) / 24;
+    // 		}
+    // 	}
+    // }
+    //
+    // function onFrame(event) {
+    // 	updateWave(path);
+    // }
+    //
+    // function updateWave(path) {
+    // 	var force = 1 - values.friction * values.timeStep * values.timeStep;
+    // 	for (var i = 0, l = path.segments.length; i < l; i++) {
+    // 		var point = path.segments[i].point;
+    // 		var dy = (point.y - point.py) * force;
+    // 		point.py = point.y;
+    // 		point.y = Math.max(point.y + dy, 0);
+    // 	}
+    //
+    // 	for (var j = 0, l = springs.length; j < l; j++) {
+    // 		springs[j].update();
+    // 	}
+    // 	path.smooth({ type: 'continuous' });
+    // }
+    //
+    // function onKeyDown(event) {
+    // 	if (event.key == 'space') {
+    // 		path.fullySelected = !path.fullySelected;
+    // 		path.fillColor = path.fullySelected ? null : 'orange';
+    // 	}
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var keyData = {
+      q: {
+        color: "red",
+        sound: new Howl({
+          src: ['A/test.wav']
+        }),
+        x: 170,
+        y: 330,
+        point: new Point(170, 330),
+        letter: 'Q'
+
+
+      },
+      w: {
+        color: "pink",
+        sound: new Howl({
+          src: ['A/pinwheel.mp3']
+        }),
+        x: 270,
+        y: 330,
+        point: new Point(270, 330),
+        letter: 'W'
+
+
+      },
+      e: {
+        color: "cyan",
+        sound: new Howl({
+          src: ['A/wobbly.wav.mp3']
+        }),
+        x: 370,
+        y: 330,
+        point: new Point(370, 330),
+        letter: 'E'
+
+
+      },
+      r: {
+        color: "orange",
+        sound: new Howl({
+          src: ['A/baby.wav.mp3']
+        }),
+        x: 470,
+        y: 330,
+        point: new Point(470, 330),
+        letter: 'R'
+
+
+      },
+      t: {
+        color: "cyan",
+        sound: new Howl({
+          src: ['A/piston-3.mp3']
+        }),
+        x: 570,
+        y: 330,
+        point: new Point(570, 330),
+        letter: 'T'
+
+
+      },
+      y: {
+        color: "cyan",
+        sound: new Howl({
+          src: ['A/prism-1.mp3']
+        }),
+        x: 670,
+        y: 330,
+        point: new Point(670, 330),
+        letter: 'Y'
+
+
+      },
+      u: {
+        color: "hotpink",
+        sound: new Howl({
+          src: ['A/hi-hat.wav.mp3']
+        }),
+        x: 770,
+        y: 330,
+        point: new Point(770, 330),
+        letter: 'U'
+
+
+      },
+      i: {
+        color: "lightpink",
+        sound: new Howl({
+          src: ['A/prism-3.mp3']
+        }),
+        x: 870,
+        y: 330,
+        point: new Point(870, 330),
+        letter: 'I'
+
+
+      },
+      o: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/splits.mp3']
+        }),
+        x: 970,
+        y: 330,
+        point: new Point(970, 330),
+        letter: 'O'
+
+
+      },
+      p: {
+        color: "yellow",
+        sound: new Howl({
+          src: ['A/squiggle.mp3']
+        }),
+        x: 1070,
+        y: 330,
+        point: new Point(1070, 330),
+        letter: 'P',
+        on: false
+
+
+      },
+      // ================================================================ asdfghjkl
+      a: {
+
+        color: "cyan",
+        sound: new Howl({
+          src: ['A/80801F.wav']
+        }),
+        x: 200,
+        y: 430,
+        point: new Point(200, 430),
+        letter: 'A',
+        on: true
+
+      },
+      s: {
+        color: "cyan",
+        sound: new Howl({
+          src:['A/80802F.wav']
+        }),
+        x: 300,
+        y: 430,
+        point: new Point(300, 430),
+        letter: 'S',
+        on: true
+
+
+      },
+      d: {
+        color: "cyan",
+        sound: new Howl({
+          src: ['A/80803F.wav']
+        }),
+        x: 400,
+        y: 430,
+        point: new Point(400, 430),
+        letter: 'D',
+        on: true
+
+
+      },
+      f: {
+        color: "cyan",
+        sound: new Howl({
+          src: ['A/corona.mp3']
+        }),
+        x: 500,
+        y: 430,
+        point: new Point(500, 430),
+        letter: 'F'
+
+
+      },
+      g: {
+        color: "cyan",
+        sound: new Howl({
+          src: ['A/dotted-spiral.mp3']
+        }),
+        x: 600,
+        y: 430,
+        point: new Point(600, 430),
+        letter: 'G'
+
+
+      },
+      h: {
+        color: "cyan",
+        sound: new Howl({
+          src: ['A/flash-1.mp3']
+        }),
+        x: 700,
+        y: 430,
+        point: new Point(700, 430),
+        letter: 'H'
+
+
+      },
+      j: {
+        color: "cyan",
+        sound: new Howl({
+          src: ['A/flash-2.mp3']
+        }),
+        x: 800,
+        y: 430,
+        point: new Point(800, 430),
+        letter: 'J'
+
+
+      },
+      k: {
+        color: "cyan",
+        sound: new Howl({
+          src: ['A/electric-piano-chord.wav.mp3']
+        }),
+        x: 900,
+        y: 430,
+        point: new Point(900, 430),
+        letter: 'K'
+
+
+      },
+      l: {
+        color: "cyan",
+        sound: new Howl({
+          src: ['A/piano-mellow-d-chord.wav.mp3']
+        }),
+        x: 1000,
+        y: 430,
+        point: new Point(1000, 430),
+        letter: 'L'
+
+
+      },
+// ====================================================   zxcvbnm
+      z: {
+        color: "blue",
+        sound: new Howl({
+          src: ['A/80804F.wav']
+        }),
+        x: 240,
+        y: 530,
+        point: new Point(240, 530),
+        letter: 'Z'
+
+
+      },
+      x: {
+        color: "pink",
+        sound: new Howl({
+          src: ['A/80805F.wav']
+        }),
+        x: 340,
+        y: 530,
+        point: new Point(340, 530),
+        letter: 'X'
+
+
+      },
+      c: {
+        color: "orange",
+        sound: new Howl({
+          src: ['A/80806F.wav']
+        }),
+        x: 440,
+        y: 530,
+        point: new Point(440, 530),
+        letter: 'C'
+
+
+      },
+      v: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/80807F.wav']
+        }),
+        x: 540,
+        y: 530,
+        point: new Point(540, 530),
+        letter: 'V'
+
+
+      },
+      b: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/veil.mp3']
+        }),
+        x: 640,
+        y: 530,
+        point: new Point(640, 530),
+        letter: 'B'
+
+
+      },
+      n: {
+        color: "cyan",
+        sound: new Howl({
+          src: ['A/wipe.mp3']
+        }),
+        point: new Point(740, 530),
+        x: 740,
+        y: 530,
+        letter: 'N'
+
+
+      },
+      m: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/zig-zag.mp3']
+        }),
+        x: 840,
+        y: 530,
+        point: new Point(840, 530),
+        letter: 'M'
+      }
+
+
+
+
+    }
+
+
+    var circles = [];
+    var texts = [];
+    var circles2 = [];
+
+
+    function onKeyDown(event) {
+
+      if(keyData[event.key]){
+
+        if (keyData[event.key].on == true){
+          keyData['a'].sound.stop();
+          keyData['s'].sound.stop();
+          keyData['d'].sound.stop();
+          keyData['q'].sound.stop();
+          keyData['z'].sound.stop();
+          keyData['x'].sound.stop();
+          keyData['c'].sound.stop();
+          keyData['v'].sound.stop();
+        } else{
+            keyData[event.key].sound.stop();
+          };
+
+            var maxPoint = new Point(view.size.width, view.size.height);
+            var randomPoint = Point.random();
+            var point = maxPoint * randomPoint;
+            var point = new Point(700, 900);
+            var point = keyData[event.key].point
+
+            var rectangle = new Rectangle(point, 80);
+            var radius = new Size(20, 20);
+            var newCircle = new Path.Rectangle(rectangle, radius);
+
+            newCircle.fillColor = keyData[event.key].color
+            circles.push(newCircle);
+
+            console.log(randomPoint);
+            console.log(maxPoint);
+
+            keyData[event.key].sound.play();
+            var x = keyData[event.key].x;
+            var y = keyData[event.key].y;
+
+            var text = new PointText(x + 39, y + 39);
+            console.log(point)
+            text.justification = 'center';
+            text.fillColor = 'white';
+            var letter = keyData[event.key].letter;
+            text.content = letter;
+            texts.push(text);
+        // }
+      }
+
+    }
+
+    var rectangle = new Rectangle(keyData['m'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+    var rectangle = new Rectangle(keyData['a'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'red';
+
+    var rectangle = new Rectangle(keyData['b'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+    var rectangle = new Rectangle(keyData['c'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'red';
+
+    var rectangle = new Rectangle(keyData['d'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'red';
+
+    var rectangle = new Rectangle(keyData['e'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+
+    var rectangle = new Rectangle(keyData['f'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+    var rectangle = new Rectangle(keyData['g'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+    var rectangle = new Rectangle(keyData['h'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+    var rectangle = new Rectangle(keyData['i'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+    var rectangle = new Rectangle(keyData['j'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+    var rectangle = new Rectangle(keyData['k'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+    var rectangle = new Rectangle(keyData['l'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+    var rectangle = new Rectangle(keyData['n'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+    var rectangle = new Rectangle(keyData['o'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+    var rectangle = new Rectangle(keyData['p'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+    var rectangle = new Rectangle(keyData['q'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'red';
+
+    var rectangle = new Rectangle(keyData['r'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+    var rectangle = new Rectangle(keyData['s'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'red';
+
+    var rectangle = new Rectangle(keyData['t'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'darkblue';
+
+    var rectangle = new Rectangle(keyData['u'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+    var rectangle = new Rectangle(keyData['v'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'red';
+
+    var rectangle = new Rectangle(keyData['w'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'blue';
+
+    var rectangle = new Rectangle(keyData['x'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'red';
+
+    var rectangle = new Rectangle(keyData['y'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'darkblue';
+
+    var rectangle = new Rectangle(keyData['z'].point, 80);
+    var radius = new Size(20, 20);
+    var path = new Path.Rectangle(rectangle, radius);
+    path.fillColor = 'red';
+
+
+     function onFrame(event){
+       for (i=0; i < circles.length; i++){
+
+         circles[i].fillColor.hue +=1;
+         circles[i].scale(.982);
+
+         // texts[i].scale(.98);
+         if(circles[i].area < 700){
+           circles[i].remove();
+           circles.splice(i, 1);
+           texts[i].remove();
+           texts.splice(i, 1);
+           console.log(circles);
+         }
+       }
+     }
+
+
+       var text = new PointText(200 + 39, 430 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'A';
+
+       var text = new PointText(300 + 39, 430 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'S';
+
+       var text = new PointText(400 + 39, 430 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'D';
+
+       var text = new PointText(500 + 39, 430 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'F';
+
+       var text = new PointText(600 + 39, 430 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'G';
+
+       var text = new PointText(700 + 39, 430 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'H';
+
+       var text = new PointText(800 + 39, 430 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'J';
+
+       var text = new PointText(900 + 39, 430 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'K';
+
+       var text = new PointText(1000 + 39, 430 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'L';
+
+       var text = new PointText(170 + 39, 330 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'Q';
+
+       var text = new PointText(270 + 39, 330 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'W';
+
+
+       var text = new PointText(370 + 39, 330 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'E';
+
+       var text = new PointText(470 + 39, 330 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'R';
+
+       var text = new PointText(570 + 39, 330 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'T';
+
+       var text = new PointText(670 + 39, 330 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'Y';
+
+       var text = new PointText(770 + 39, 330 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'U';
+
+
+       var text = new PointText(870 + 39, 330 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'I';
+
+       var text = new PointText(970 + 39, 330 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'O';
+
+       var text = new PointText(1070 + 39, 330 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'P';
+
+
+       var text = new PointText(240 + 39, 530 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'Z';
+
+       var text = new PointText(340 + 39, 530 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'X';
+
+       var text = new PointText(440 + 39, 530 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'C';
+
+       var text = new PointText(540 + 39, 530 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'V';
+
+       var text = new PointText(640 + 39, 530 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'B';
+
+       var text = new PointText(740 + 39, 530 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'N';
+
+       var text = new PointText(840 + 39, 530 + 39);
+       text.justification = 'center';
+       text.fillColor = 'white';
+       text.content = 'M';
+
+
+    </script>
+<style>
+body{
+  background: black;
+  color: white;
+  text-align: center;
+  font-family: Consolas;
+}
+
+</style>
+  </head>
+
+  <body>
+<div class="">
+  <h1 >BEAT_MAKER</h1>
+
+</div>
+<!-- <canvas id="myCanvas2"></canvas> -->
+<!-- <div id="myCanvas2">
+
+</div> -->
+
+    <canvas id="myCanvas"></canvas>
+
+  </body>
+
+</html>
+<!-- // var sound1 = new Howl({
+//   src: ['A/bubbles.mp3']
+// });
+// var sound2 = new Howl({
+//   src: ['A/clay.mp3']
+// });
+// -->
+
+<!-- // if(event.key === "a"){
+//   sound1.play();
+//   newCircle.fillColor = "purple";
+//
+// }
+// else if (event.key === "s"){
+//   sound2.play();
+//   newCircle.fillColor = "#16a085";
+// }
+// else{
+//   // sound1.play();
+//   newCircle.fillColor = "orange";
+// }
+// circles.push(new Path.Circle(point, 10).fillColor = "orange"); -->

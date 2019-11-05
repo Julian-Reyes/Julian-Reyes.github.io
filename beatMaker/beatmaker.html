@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="beatmaker.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.js" ></script>
+    <script type="text/javascript" src="paper-full.min.js"></script>
+    <script type="text/paperscript" canvas="myCanvas">
+
+
+
+    var keyData = {
+      a: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/80801F.wav']
+        })
+      },
+      s: {
+        color: "green",
+        sound: new Howl({
+          src:['A/80802F.wav']
+        })
+      },
+      d: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/80803F.wav']
+        })
+      },
+      f: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/corona.mp3']
+        })
+      },
+      g: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/dotted-spiral.mp3']
+        })
+      },
+      h: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/flash-1.mp3']
+        })
+      },
+      j: {
+        color: "cyan",
+        sound: new Howl({
+          src: ['A/flash-2.mp3']
+        })
+      },
+      k: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/flash-3.mp3']
+        })
+      },
+      l: {
+        color: "cyan",
+        sound: new Howl({
+          src: ['A/glimmer.mp3']
+        })
+      },
+      q: {
+        color: "red",
+        sound: new Howl({
+          src: ['A/test.wav']
+        })
+      },
+      w: {
+        color: "blue",
+        sound: new Howl({
+          src: ['A/pinwheel.mp3']
+        })
+      },
+      e: {
+        color: "maroon",
+        sound: new Howl({
+          src: ['A/piston-1.mp3']
+        })
+      },
+      r: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/piston-2.mp3']
+        })
+      },
+      t: {
+        color: "darkblue",
+        sound: new Howl({
+          src: ['A/piston-3.mp3']
+        })
+      },
+      y: {
+        color: "lightpurple",
+        sound: new Howl({
+          src: ['A/prism-1.mp3']
+        })
+      },
+      u: {
+        color: "hotpink",
+        sound: new Howl({
+          src: ['A/prism-2.mp3']
+        })
+      },
+      i: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/prism-3.mp3']
+        })
+      },
+      o: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/splits.mp3']
+        })
+      },
+      p: {
+        color: "yello",
+        sound: new Howl({
+          src: ['A/squiggle.mp3']
+        })
+      },
+      z: {
+        color: "blue",
+        sound: new Howl({
+          src: ['A/80804F.wav']
+        })
+      },
+      x: {
+        color: "pink",
+        sound: new Howl({
+          src: ['A/80805F.wav']
+        })
+      },
+      c: {
+        color: "orange",
+        sound: new Howl({
+          src: ['A/80806F.wav']
+        })
+      },
+      v: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/80807F.wav']
+        })
+      },
+      b: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/veil.mp3']
+        })
+      },
+      n: {
+        color: "cyan",
+        sound: new Howl({
+          src: ['A/wipe.mp3']
+        })
+      },
+      m: {
+        color: "purple",
+        sound: new Howl({
+          src: ['A/zig-zag.mp3']
+        })
+      }
+
+
+    }
+
+
+
+    var circles = [];
+    function onKeyDown(event) {
+      var isPress = true;
+      if(keyData[event.key] && isPress = true){
+        keyData[event.key].sound.stop();
+
+        var maxPoint = new Point(view.size.width, view.size.height);
+        var randomPoint = Point.random();
+        var point = maxPoint * randomPoint;
+        var newCircle = new Path.Circle(point, 500)
+        newCircle.fillColor = keyData[event.key].color
+        circles.push(newCircle);
+
+        keyData[event.key].sound.play();
+        isPress = false;
+
+      }
+      isPress = true;
+    }
+
+
+
+     function onFrame(event){
+       for (i=0; i < circles.length; i++){
+         circles[i].fillColor.hue +=1;
+         circles[i].scale(.9);
+         if(circles[i].area < 1){
+           circles[i].remove();
+           circles.splice(i, 1);
+           console.log(circles);
+         }
+       }
+     }
+
+    </script>
+  </head>
+
+  <body>
+
+    <canvas id="myCanvas"></canvas>
+
+  </body>
+
+</html>
+
+<!-- *******how to get rid of cross origin policy errors *******-->
+<!-- 1) navigate to your project folder in the terminal
+
+2) if you have python v2.x installed then run:
+
+python -m SimpleHTTPServer
+ or for python v3.x:
+
+python -m http.server
+3) open up your browser and navigate to http://localhost:8000
+
+4) select the circles.html file -->
+
+
+<!-- // var sound1 = new Howl({
+//   src: ['A/bubbles.mp3']
+// });
+// var sound2 = new Howl({
+//   src: ['A/clay.mp3']
+// });
+// -->
+
+<!-- // if(event.key === "a"){
+//   sound1.play();
+//   newCircle.fillColor = "purple";
+//
+// }
+// else if (event.key === "s"){
+//   sound2.play();
+//   newCircle.fillColor = "#16a085";
+// }
+// else{
+//   // sound1.play();
+//   newCircle.fillColor = "orange";
+// }
+// circles.push(new Path.Circle(point, 10).fillColor = "orange"); -->
