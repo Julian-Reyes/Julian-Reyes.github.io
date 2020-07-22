@@ -18,6 +18,22 @@
 		font: inherit;
 		vertical-align: baseline;
 	}
+	@media only screen and (max-width: 590px) {
+	  .res {
+	    font-size: 1.1em !important;
+	  }
+	}
+	@media only screen and (max-width: 549px) {
+	  .res, .res2 {
+	    font-size: .8em !important;
+	  }
+	}
+	@media only screen and (min-width: 10px) {
+	  .project {
+	    margin-top: 70px !important;
+		/* background: blue; */
+	  }
+	}
 
 	#link{
 		padding: 15px;
