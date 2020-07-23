@@ -28,10 +28,28 @@
 	    font-size: .8em !important;
 	  }
 	}
+	@media only screen and (max-width: 375px) {
+	  .res, .res2 {
+		font-size: .7em !important;
+	  }
+	}
+	@media only screen and (max-width: 320px) {
+	  .res, .res2 {
+		font-size: .6em !important;
+	  }
+	}
 	@media only screen and (min-width: 10px) {
 	  .project {
 	    margin-top: 70px !important;
 		/* background: blue; */
+	  }
+	}
+	@media only screen and (min-width: 10px) {
+	  .exp, #exp2 {
+	    /* width: 100% !important; */
+		background: blue;
+		color: orange;
+		/* background: 736px; */
 	  }
 	}
 
