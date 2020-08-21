@@ -304,16 +304,30 @@ footer{
 }
 /* /FOOTER */
 
-/* MEDIA QUERIES */
 
 
 
-/* MEDIA QUERIES */
-@media only screen and (min-width: 1px){
-    .card{
-        width: 70%;
-        margin: 20px auto;
+/****** MEDIA QUERIES ******/
+
+/* FOOTER */
+@media only screen and (max-width: 767px){
+    .footer-rightdiv{
+        text-align: center;
+        margin-top: 50px;
     }
+}
+@media only screen and (min-width: 768px){
+    .footer-rightdiv{
+        text-align: left;
+        margin-top: 50px;
+        padding-left: 80px;
+    }
+}/* FOOTER */
+
+
+/* MENU */
+@media only screen and (min-width: 1px){
+
     .menu-price{
         text-align: right;
         padding-right: 40px;
@@ -337,10 +351,6 @@ footer{
     }
 }
 @media only screen and (min-width: 321px){
-    .card{
-        width: 70%;
-        margin: 20px auto;
-    }
     .menu-price{
         text-align: right;
         padding-right: 40px;
@@ -364,10 +374,6 @@ footer{
     }
 }
 @media only screen and (min-width: 376px){
-    .card{
-        width: 70%;
-        margin: 20px auto;
-    }
     .menu-price{
         text-align: right;
         padding-right: 40px;
@@ -391,9 +397,6 @@ footer{
     }
 }
 @media only screen and (min-width: 426px){
-    .desktop-ymarg-150{
-        margin: 150px 0;
-    }
     .menu-price{
         text-align: right;
         padding-right: 150px;
@@ -415,24 +418,8 @@ footer{
         margin: 0 auto;
         text-align: center;
     }
-}@media only screen and (max-width: 767px){
-    .footer-rightdiv{
-        text-align: center;
-        margin-top: 50px;
-    }
 }
-@media only screen and (min-width: 768px){
-    .footer-rightdiv{
-        text-align: left;
-        margin-top: 50px;
-        padding-left: 80px;
-    }
-}
-
 @media only screen and (min-width: 769px){
-    .desktop-ymarg-150{
-        margin: 150px 0;
-    }
     .menu-price{
         text-align: right;
         padding-right: 150px;
@@ -454,5 +441,19 @@ footer{
         margin: 0 auto;
         text-align: center;
     }
-}
+}/* MENU */
 
+/* CARD */
+@media only screen and (max-width: 426px){
+    .card{
+        width: 70%;
+        margin: 20px auto;
+    }
+}/* CARD */
+
+/* SPECIAL OFFERS SECTION */
+@media only screen and (min-width: 1024px){
+    .desktop-ymarg-150{
+        margin: 150px 0;
+    }/* SPECIAL OFFERS SECTION */
+    
