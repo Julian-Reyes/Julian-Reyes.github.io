@@ -59,80 +59,311 @@ h4{
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
 }
-nav{
-	background: blue;
+.heroHeading{
+    text-shadow: 2px 2px 2px black;
+    font-size: 3.6em;
+    font-weight: 400;
+    font-family: 'Pinyon Script', cursive;
+    font-size: 6.5em;
+}
+.heroSubheading{
+    text-shadow: 2px 2px 2px black;
+    font-size: 2.5em;
+    font-weight: 300;
+}
+#hero article{
+	width: 100%;
+	text-align: center;
+}/* /HERO */
+
+
+/* CHEFS RECS */
+.fw-200{
+    font-weight: 200;
+}
+.fw-300{
+    font-weight: 300;
+}
+.card-p-margin{
+    margin:  5px 20px 20px 20px;
+}
+.card-img-height{
+    height: 280px;
+}/* /CHEFS RECS */
+
+
+/* GRID */
+.overflow-hidden{
+    overflow: hidden;
+}
+.color-white{
+    color: white;
 }
 
-@media only screen and (min-width: 998px){
-    .dt-ymarg-150{
-        margin: 150px 0;
-    }
+.text-shadow-black{
+    text-shadow: 2px 2px 2px black;
 }
+.grid-square-1{
+    background-image: url('../img/curtis-thornton-unsplash.jpg');   background-repeat: no-repeat;background-attachment: absolute;background-position: center top; height: 300px;background-size: cover;color: white;
+}
+.grid-square-2{
+    background-color: #4f1b09;
+}
+.grid-square-3{
+    background-image: url('../img/mex_food2.jpg');
+    min-height: 300px;
+    background-size: cover;
+}
+.grid-square-4{
+    background-image: url('../img/jarritos-mexican-soda-4.jpg');
+    min-height: 300px;
+    background-size: cover;
+}
+.grid-square-5{
+    background-image: url('../img/natasha-bhogal-unsplash.jpg');
+    background-size: cover;
+}/* /GRID */
+
+
+/* SPECIAL OFFERS */
+.mr-0{
+    margin-right: 0;
+}
+.pr-0{
+    padding-right: 0;
+}
+.special-offers-right{
+    padding-left:70px;
+    background: #fdad5c;
+    margin-left: 0;
+}
+.pb-20{
+    padding-bottom: 20px;
+}
+.color-red{
+    color: red;
+}
+.special-offers-heading{
+    margin-top: 40px;
+    font-weight: 400;
+}
+
+.special-offers-p-width{
+    width: 60%;
+}
+.special-offers-button{
+    background-color: #ae3b14;
+    color: white;
+    font-weight: 300;
+}
+.special-offers-color{
+    color: #ae3b14;
+}/* /SPECIAL OFFERS */
+
+
+/* MENU */
+.menu-section{
+    background-image: url('../img/mex_dishes.jpg');
+    padding: 50px 0;
+}
+
+.menu-li-style{
+    font-size: 10px;
+    margin-top: -15px;
+}
+/* /MENU */
+
+
+/* CATERING */
+.catering-textdiv-margin{
+    margin: 40px 0;
+}
+.fw-400{
+    font-weight: 400;
+}
+.text-shadow-black-light{
+    text-shadow: 1px 1px 1px black;
+}
+.fw-500{
+    font-weight: 500;
+}
+.catering-right-bg{
+    background: #ae3b14;
+}
+.catering-right-img-padding{
+    padding: 100px;
+}/* /CATERING */
+
+
+/* BUFFET */
+.buffet-imgdiv-margin{
+    margin: 50px;
+}
+.buffet-textdiv-styling{
+    margin-top: 85px;
+    padding-bottom: 40px;
+}
+.buffet-h1{
+    font-weight: 300;
+    color: maroon;
+}
+.buffet-hr-line{
+    border: 3px solid grey;
+    width: 200px;
+}/* /BUFFET */
+
+
+/* TAKEOUT */
+.takeout-section-styling{
+    background: orange;
+    padding: 70px 0;
+}
+.takeout-hr-line{
+    border: 3px solid grey;
+    width: 150px;
+}
+.takeout-button{
+    background: orange;
+    border: 1px solid white;
+    color: white;
+    font-weight: 100;
+}
+.margin-0-auto{
+    margin: 0 auto;
+}
+.takeout-img{
+    padding: 40px 0;
+    padding-left: 60px;
+    padding-bottom: 50px;
+}/* /TAKEOUT */
+
+
+
+/* A TASTE OF MEXICO */
+.taste-section-bg-style{
+    opacity: .85;
+    background-size: cover;
+}
+.taste-textdiv{
+    padding: 70px 0;
+    color: white;
+    text-align: center;
+}
+.taste-heading{
+    font-family: 'Pinyon Script', cursive;
+    font-size: 5.5em;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+}
+.taste-p-font-size{
+    font-size: 1.4em;
+}
+.taste-button{
+    background: white;
+    font-weight: 300;
+    font-size: .9em;
+    padding: 15px 50px;
+}/* A TASTE OF MEXICO */
+
+
+/* GOOGLE MAPS */
+.google-maps-section{
+    background: #4f1b09;    
+}
+.google-maps-heading{
+    padding-top:30px;
+    color: white;
+    font-weight: 300;
+    font-size: 2.7em;
+}
+#map {
+    height: 400px;  /* The height is 400 pixels */
+    width: 100%;  /* The width is the width of the web page */
+}/* GOOGLE MAPS */
+
+
+/* FOOTER */
+footer{
+    background-color: #4f1b09;
+    min-height: 250px;
+    color: white;
+}
+.footer-leftdiv{
+    margin-top: 67px;
+}
+.footer-middlediv{
+    padding-top: 30px;
+}
+.footer-vertical-line{
+    font-size: 3em;
+}
+.footer-email{
+    margin: 10px 0 0 0;
+}
+.footer-disclaimer{
+    margin: 50px 0 0 0;
+}
+.footer-rightdiv{
+    text-align: left;
+    margin-top: 50px;
+    padding-left: 80px;
+}/* /FOOTER */
+
+/* MEDIA QUERIES */
+
+
+
+/* MEDIA QUERIES */
 @media only screen and (max-width: 998px){
     .card{
         width: 70%;
         margin: 20px auto;
     }
+    .menu-price{
+        text-align: right;
+        padding-right: 40px;
+    }
+    .menu-menu-margin{
+        margin-left: 25px;
+    }
+    .menu-border-div{
+        width: 90%;
+        height: 2600px;
+        background-color:rgba(0,0,0,0.2);
+        margin: 0 auto;
+        padding-top: 10px;
+    }
+    .menu-menu{
+        width: 98%;
+        height: 2580px;
+        background-color: white;
+        margin: 0 auto;
+        text-align: center;
+    }
 }
-
-#hero article{
-	width: 100%;
-	text-align: center;
-}
-
-.menu-right{
-    text-align: right;
-    padding-right: 150px;
-}
-#map {
-        height: 400px;  /* The height is 400 pixels */
-        width: 100%;  /* The width is the width of the web page */
-}
-
-#price-timeline{
-	margin: 30px 0 60px;
-	text-align: center;
-}
-
-#price-timeline .price{
-	display: inline-block;
-	margin: 0 2% 0 0;
-	width: 30%;
-	background: #3e4249;
-	padding: 10px 20px 30px;
-	position: relative;
-	vertical-align: top;
-}
-
-#price-timeline .price.active{
-	background: #dd5638;
-}
-
-#price-timeline .price span{
-	background: #101010;
-	display: block;
-	height: 70px;
-	width: 70px;
-	text-align: center;
-	line-height: 70px;
-	font-weight: bold;
-	font-size: 24px;
-	border-radius: 100%;
-	-webkit-border-radius: 100%;
-	-moz-border-radius: 100%;
-	position: absolute;
-	bottom: -35px;
-	left: 50%;
-	margin-left: -35px;
-}
-
-#price-timeline h4{
-	margin: 0 0 10px;
-}
-
-#price-timeline h4 small {
-	color: white;
-	font-weight: bold;
-	display: block;
+@media only screen and (min-width: 998px){
+    .desktop-ymarg-150{
+        margin: 150px 0;
+    }
+    .menu-price{
+        text-align: right;
+        padding-right: 150px;
+    }
+    .menu-menu-margin{
+        margin-left: 75px;
+    }
+    .menu-border-div{
+        width: 90%;
+        height: 1320px;
+        background-color:rgba(0,0,0,0.2);
+        margin: 0 auto;
+        padding-top: 10px;
+    }
+    .menu-menu{
+        width: 98%;
+        height: 1300px;
+        background-color: white;
+        margin: 0 auto;
+        text-align: center;
+    }
 }
 
