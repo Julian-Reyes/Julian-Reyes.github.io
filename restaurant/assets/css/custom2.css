@@ -313,7 +313,7 @@ footer{
 
 
 /* MEDIA QUERIES */
-@media only screen and (max-width: 998px){
+@media only screen and (min-width: 1px){
     .card{
         width: 70%;
         margin: 20px auto;
@@ -327,20 +327,100 @@ footer{
     }
     .menu-border-div{
         width: 90%;
-        height: 2600px;
+        height: 2580px;
         background-color:rgba(0,0,0,0.2);
         margin: 0 auto;
         padding-top: 10px;
     }
     .menu-menu{
         width: 98%;
-        height: 2580px;
+        height: 2560px;
         background-color: white;
         margin: 0 auto;
         text-align: center;
     }
 }
-@media only screen and (min-width: 998px){
+@media only screen and (min-width: 321px){
+    .card{
+        width: 70%;
+        margin: 20px auto;
+    }
+    .menu-price{
+        text-align: right;
+        padding-right: 40px;
+    }
+    .menu-menu-margin{
+        margin-left: 25px;
+    }
+    .menu-border-div{
+        width: 90%;
+        height: 2020px;
+        background-color:rgba(0,0,0,0.2);
+        margin: 0 auto;
+        padding-top: 10px;
+    }
+    .menu-menu{
+        width: 98%;
+        height: 2000px;
+        background-color: white;
+        margin: 0 auto;
+        text-align: center;
+    }
+}
+@media only screen and (min-width: 376px){
+    .card{
+        width: 70%;
+        margin: 20px auto;
+    }
+    .menu-price{
+        text-align: right;
+        padding-right: 40px;
+    }
+    .menu-menu-margin{
+        margin-left: 25px;
+    }
+    .menu-border-div{
+        width: 90%;
+        height: 1740px;
+        background-color:rgba(0,0,0,0.2);
+        margin: 0 auto;
+        padding-top: 10px;
+    }
+    .menu-menu{
+        width: 98%;
+        height: 1720px;
+        background-color: white;
+        margin: 0 auto;
+        text-align: center;
+    }
+}
+@media only screen and (min-width: 426px){
+    .desktop-ymarg-150{
+        margin: 150px 0;
+    }
+    .menu-price{
+        text-align: right;
+        padding-right: 150px;
+    }
+    .menu-menu-margin{
+        margin-left: 75px;
+    }
+    .menu-border-div{
+        width: 90%;
+        height: 1420px;
+        background-color:rgba(0,0,0,0.2);
+        margin: 0 auto;
+        padding-top: 10px;
+    }
+    .menu-menu{
+        width: 98%;
+        height: 1400px;
+        background-color: white;
+        margin: 0 auto;
+        text-align: center;
+    }
+}
+@media only screen and (min-width: 769px){
     .desktop-ymarg-150{
         margin: 150px 0;
     }
