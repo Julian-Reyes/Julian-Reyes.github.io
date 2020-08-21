@@ -302,11 +302,7 @@ footer{
 .footer-disclaimer{
     margin: 50px 0 0 0;
 }
-.footer-rightdiv{
-    text-align: left;
-    margin-top: 50px;
-    padding-left: 80px;
-}/* /FOOTER */
+/* /FOOTER */
 
 /* MEDIA QUERIES */
 
@@ -419,7 +415,21 @@ footer{
         margin: 0 auto;
         text-align: center;
     }
+}@media only screen and (max-width: 767px){
+    .footer-rightdiv{
+        text-align: center;
+        margin-top: 50px;
+    }
 }
+@media only screen and (min-width: 768px){
+    .footer-rightdiv{
+        text-align: left;
+        margin-top: 50px;
+        padding-left: 80px;
+        
+    }
+}
+
 @media only screen and (min-width: 769px){
     .desktop-ymarg-150{
         margin: 150px 0;
