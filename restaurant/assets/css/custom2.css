@@ -52,7 +52,7 @@ h4{
 }
 /* HERO */
 #hero{
-	background: url('../img/ritas.jpg') 50% 0 repeat fixed;
+	background: url('../img/ritas.jpg') 50% 0 no-repeat fixed;
     min-height: 740px;
 	padding: 40px 0;
 	color: white;
@@ -449,6 +449,9 @@ footer{
     .card{
         width: 70%;
         margin: 20px auto;
+    }
+    .card-img-height{
+        height: 255px;
     }
 /* CATERING IMAGE */
     .catering-right-img-padding{
