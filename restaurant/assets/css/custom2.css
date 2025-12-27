@@ -3,7 +3,7 @@ Green: #79b044
 Salmon: #dd5638
 Blue Gray: #3e4249
  */
- 
+
 body{
 	/* font-family: 'proxima-nova', 'Raleway', Helvetica, sans-serif; */
     font-family: 'Roboto';
@@ -52,8 +52,16 @@ h4{
 }
 /* HERO */
 #hero{
-	background: url('../img/ritas.jpg') 50% 0 no-repeat fixed;
-    min-height: 740px;
+  width: 100vw;
+  margin-top: -2px;
+	background:
+  linear-gradient(
+      155deg,
+      rgba(200, 100, 200, 0.4),
+      rgba(100, 200, 100, 0.4)
+    ),
+    url('../img/ritas.jpg') center / cover no-repeat;
+  min-height: 740px;
 	padding: 40px 0;
 	color: white;
 	-webkit-font-smoothing: antialiased;
@@ -268,7 +276,7 @@ h4{
 
 /* GOOGLE MAPS */
 .google-maps-section{
-    background: #4f1b09;    
+    background: #4f1b09;
 }
 .google-maps-heading{
     padding-top:30px;
@@ -464,4 +472,3 @@ footer{
     .desktop-ymarg-150{
         margin: 150px 0;
     }/* SPECIAL OFFERS SECTION */
-    
