@@ -51,7 +51,8 @@ h4{
 	text-rendering: optimizeLegibility;
 }
 nav{
-	background: blue;
+	/*background: blue;*/
+	font-weight: bold !important;
 }
 
 

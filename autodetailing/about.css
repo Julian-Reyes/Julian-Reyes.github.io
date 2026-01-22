@@ -4,6 +4,13 @@ body{
   background-image: url(vb4.webp);
   /* background-repeat: no-repeat; */
 
+
+/*  background-repeat: no-repeat; 
+  background-position: center top;
+  background-size: cover;
+  min-height: 100vh;
+*/
+
 }
 
 h1{

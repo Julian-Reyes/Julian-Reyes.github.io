@@ -1,0 +1,90 @@
+/* General Fixes */
+body {
+  overflow-x: hidden;
+  /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
+  margin-bottom: 0;
+}
+html{
+  margin-bottom: 0;
+}
+
+
+/* Hero Section Refactoring */
+.hero {
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+              url('vb4.webp') no-repeat center center/cover;
+  min-height: 100vh; /* Allows it to grow if content is long */
+  display: flex;
+  align-items: top;
+  padding: 100px 0 50px 0; /* Space for fixed navbar */
+  color: red;
+}
+p{
+  font-size: .9em;
+}
+.hero-left-border {
+  border-right: 3px solid #cc0000;
+  padding-right: 30px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .hero-left-border {
+    border-right: none;
+    border-bottom: 3px solid #cc0000;
+    padding-right: 0;
+    padding-bottom: 30px;
+  }
+  
+  .hero {
+    height: auto; /* Let it expand naturally on mobile */
+    text-align: center;
+  }
+}
+
+.feature{
+  margin: 40px 0;
+}
+
+.display-4 {
+  color: #cc0000;
+  text-transform: uppercase;
+  font-size: 2.7em;
+  margin-top: -50px;
+}
+
+.service-card {
+  padding: 30px;
+  background: #f8f9fa;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+}
+
+.secondrow{
+  background-color: lightblue;
+  width: 100% !important;
+  padding-bottom: 1px;
+  padding-top: 1px;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Remove your old .col-xs-7 height lock */
+.col-xs-7, .col-lg-7 {
+  height: auto !important; 
+}
+
+.footer{
+  background-color: lightblue;
+  width: 100%;
+  margin-bottom: 0;
+  padding-bottom: 1px;
+  padding-top: 15px;
+}
+.footer2{
+  margin: 0 auto;
+  width: 150px;
+}

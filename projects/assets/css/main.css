@@ -18,6 +18,9 @@
 		font: inherit;
 		vertical-align: baseline;
 	}
+
+
+
 	@media only screen and (max-width: 590px) {
 	  .res {
 	    font-size: 1.1em !important;
@@ -3144,6 +3147,8 @@
 					.wrapper.style1 .button.alt:active {
 						background-color: rgba(144, 144, 144, 0.2);
 					}
+
+
 
 		.wrapper.style2 {
 			background-color: #1E2832;

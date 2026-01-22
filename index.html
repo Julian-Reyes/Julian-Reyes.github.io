@@ -10,10 +10,11 @@
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
 		<link rel="stylesheet" href="index/assets/css/main.css"/>
 		<link rel="icon" href="favicon/favicon-dev-32.png">
 
-		<!-- <link rel="stylesheet" href="assets_urban/css/main.css" /> -->
 
 	</head>
 	<style media="screen">
@@ -46,6 +47,8 @@
 	  }
 	}
 	</style>
+
+
 	<body class="landing">
 
 		<!-- Header -->
@@ -54,17 +57,30 @@
 				<li> </li>
 
 
-				<nav id="nav">
+				<nav id="navX">
 					<ul>
-						<li><a  class="link link_samepage" href="#bio">Summary</a></li>
-						<li><a  class="link" href="projects.html" target="_blank">Projects</a></li>
-						<!-- <li><a  class="link link_samepage" href="#">Bio</a></li> -->
+						<li><a  class="link" href="projects/projects2.html" target="_blank">Projects</a></li>
+						<li><a class="link" href="index/resumes/resume.pdf" target="_blank">Resume</a></li>
+					</ul>
+				</nav>
+				<nav style="display: none;" id="nav">
+					<ul>
+						<li><a  class="link" href="index.html">Home</a></li>
+						<li><a  class="link" href="#highlights">Highlights</a></li>
+						<li><a  class="link" href="#experience">Experience</a></li>
+						<li><a  class="link" href="projects/projects2.html" target="_blank">Projects</a></li>
+						<li><a  class="link" href="https://www.linkedin.com/in/julian-reyes-1b2727190/" target="_blank">LinkedIn</a></li>
 						<li><a class="link" href="index/resumes/resume.pdf" target="_blank">Resume</a></li>
 					</ul>
 				</nav>
 			</header>
 
 			<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+
+
+
+	
+
 
 		<!-- Banner --------------------------------------->
 			<section id="banner">
@@ -347,7 +363,7 @@
 			<!-- Three -->
 				<section id="three" class="wrapper style1">
 					<div style="max-width: 1680px; margin-left: auto; margin-right: auto;" class="container">
-						<header class="major special">
+						<header class="major special text-center">
 							<h2 id="highlights">Selected Highlights</h2>
 							<p>Featured Skills of Interest</p>
 						</header>
@@ -446,7 +462,7 @@
 
 
 
-								<section id="two" class="wrapper style2 special">
+								<section id="two" class="wrapper style2 special" style="padding-top: 15px;">
 									<div class="container">
 										<header class="major">
 											<h2>Education</h2>
@@ -454,7 +470,7 @@
 										</header>
 										<div class="row 150%">
 											<!-- Westview -->
-											<div class="6u$ 12u$(xsmall)">
+											<div class="6u$ 12u$(small)">
 												<div style="display:flex; flex-direction: column; align-items: center; justify-content: center; width: 85%; margin: 0 auto; text-align: center;" class="image fit captioned">
 													<img class="W8" src="index/assets/img/sd.jpeg" alt="" />
 													<h3 class="W8" >Westview - San Diego, CA</h3>
@@ -462,7 +478,7 @@
 											</div>
 											<!-- /Westview -->
 											<!-- UC Davis -->
-											<div class="6u$ 12u$(xsmall)">
+											<div class="6u$ 12u$(small)">
 												<div style="display:flex; flex-direction: column; align-items: center; justify-content: center;width: 85%; margin: 0 auto; text-align: center;" class="image fit captioned">
 													<img class="W8" src="index/assets/img/uc-davis-4.jpg" alt="" />
 													<h3 class="W8" >UC Davis - Davis, CA</h3>
@@ -527,10 +543,10 @@
 });
 
 		</script>
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="index/assets/js/jquery.min.js"></script>
+			<script src="index/assets/js/skel.min.js"></script>
+			<script src="index/assets/js/util.js"></script>
+			<script src="index/assets/js/main.js"></script>
 
 	</body>
 </html>

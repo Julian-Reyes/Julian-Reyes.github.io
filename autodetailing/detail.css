@@ -1,18 +1,33 @@
 .navbar-header:hover {
 color: red;
 }
-body{
+hero{
   padding-top: 60px;
-
-   
+  background-position: center top;
   background-size: cover;
   background-image: url(vb4.webp);
   background-repeat: no-repeat;
-
-background-size: 1600px;
+  width: 100%;
+  /*height: auto;*/
+  min-height: 100vh;
+/*background-size: 1600px;*/
 color: #cc0000;
 background-color: lightblue;
+}
 
+.hero{
+  /* High-quality background image */
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+              url('vb4.webp') no-repeat center center/cover;
+  
+  height: 100vh;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center; /* Vertical center */
+  justify-content: center; /* Horizontal center */
+  text-align: center;
+  color: #cc0000;
 }
 
 textarea { vertical-align: top;}

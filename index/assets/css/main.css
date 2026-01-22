@@ -19,8 +19,6 @@
 	}
 
 
-
-
 	.link{
 		color: white;
 		text-decoration: none;
@@ -2850,19 +2848,19 @@
 					padding-left: 0;
 				}
 
-					/* #header nav ul li a {
+					 #header nav ul li a {
 						-moz-transition: color 0.2s ease-in-out;
 						-webkit-transition: color 0.2s ease-in-out;
 						-ms-transition: color 0.2s ease-in-out;
 						transition: color 0.2s ease-in-out;
-						color: #666;
+						/*color: #666;*/
 						display: inline-block;
 						text-decoration: none;
-					} */
+					} 
 
-						/* #header nav ul li a:hover {
-							color: #484848;
-						} */
+						 #header nav ul li a:hover {
+							/*color: #484848;*/
+						} 
 
 					#header nav ul li:first-child {
 						margin-left: 0;
@@ -3299,3 +3297,5 @@
 
 
 		}
+
+		

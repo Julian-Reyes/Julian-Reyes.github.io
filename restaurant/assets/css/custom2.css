@@ -55,12 +55,7 @@ h4{
   width: 100vw;
   margin-top: -2px;
 	background:
-  linear-gradient(
-      155deg,
-      rgba(200, 100, 200, 0.4),
-      rgba(100, 200, 100, 0.4)
-    ),
-    url('../img/ritas.jpg') center / cover no-repeat;
+    url('../img/ritas2.png') center / cover no-repeat;
   min-height: 740px;
 	padding: 40px 0;
 	color: white;
@@ -142,7 +137,7 @@ h4{
 }
 .special-offers-right{
     padding-left:70px;
-    background: #fdad5c;
+    background: #ff9933;
     margin-left: 0;
 }
 .pb-20{

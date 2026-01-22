@@ -41,31 +41,37 @@
 
 		// Off-Canvas Navigation.
 
-			// Navigation Panel Toggle.
-			// 	$('<a href="#navPanel" class="navPanelToggle"></a>')
-			// 		.appendTo($body);
-			//
-			// // Navigation Panel.
-			// 	$(
-			// 		'<div id="navPanel">' +
-			// 			$('#nav').html() +
-			// 			'<a href="#navPanel" class="close"></a>' +
-			// 		'</div>'
-			// 	)
-			// 		.appendTo($body)
-			// 		.panel({
-			// 			delay: 500,
-			// 			hideOnClick: true,
-			// 			hideOnSwipe: true,
-			// 			resetScroll: true,
-			// 			resetForms: true,
-			// 			side: 'right'
-			// 		});
-			//
-			// // Fix: Remove transitions on WP<10 (poor/buggy performance).
-			// 	if (skel.vars.os == 'wp' && skel.vars.osVersion < 10)
-			// 		$('#navPanel')
-			// 			.css('transition', 'none');
+			// Off-Canvas Navigation.
+
+// Navigation Panel Toggle.
+$('<a href="#navPanel" class="navPanelToggle"></a>')
+  .appendTo($body);
+
+// Navigation Panel.
+var $navPanel = $(
+  '<div id="navPanel">' +
+    '<nav>' +
+      $('#nav').html() +
+    '</nav>' +
+    '<a href="#navPanel" class="close"></a>' +
+  '</div>'
+);
+
+$navPanel
+  .appendTo($body)
+  .panel({
+    delay: 500,
+    hideOnClick: true,
+    hideOnSwipe: true,
+    resetScroll: true,
+    resetForms: true,
+    side: 'right'
+  });
+
+// Fix: Remove transitions on WP<10
+if (skel.vars.os == 'wp' && skel.vars.osVersion < 10)
+  $navPanel.css('transition', 'none');
+
 
 
 	});
