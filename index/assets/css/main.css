@@ -2938,25 +2938,48 @@
 /* Menu */
 
 	.navPanelToggle {
-		text-decoration: none;
-		text-decoration: none;
-		height: 100%;
-		left: 0;
-		position: absolute;
-		top: 0;
-		width: 100%;
-		display: none;
-	}
+    text-decoration: none;
+    display: none;
+    position: fixed;
+    top: 0.5em;
+    left: 0.5em;
+    width: 3.5em;
+    height: 2.25em;
+    z-index: 10002;
+}
 
-		.navPanelToggle:before {
-			-moz-osx-font-smoothing: grayscale;
-			-webkit-font-smoothing: antialiased;
-			font-family: FontAwesome;
-			font-style: normal;
-			font-weight: normal;
-			text-transform: none !important;
-		}
+.navPanelToggle:before {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-transform: none !important;
+    background: rgba(144, 144, 144, 0.65);
+    border-radius: 4px;
+    color: #fff;
+    display: block;
+    font-size: 16px;
+    height: 2.25em;
+    line-height: 2.25em;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 3.5em;
+}
+#navPanel.visible ~ #hamburger {
+    display: none !important;
+}
+#hamburger {
+    display: none;
+}
 
+@media screen and (max-width: 980px) {
+    #hamburger {
+        display: block;
+    }
+}
 		@media screen and (max-width: 980px) {
 
 			.navPanelToggle {
@@ -3292,10 +3315,12 @@
 					margin: 0;
 					padding: 0;
 				}
+				#project-button{
+					padding-left: 20px;
+					padding-right: 20px;
+				}
 
 
 
 
 		}
-
-		

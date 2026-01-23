@@ -44,8 +44,8 @@
 			// Off-Canvas Navigation.
 
 // Navigation Panel Toggle.
-$('<a href="#navPanel" class="navPanelToggle"></a>')
-  .appendTo($body);
+// $('<a href="#navPanel" class="navPanelToggle"></a>')
+//   .appendTo($body);
 
 // Navigation Panel.
 var $navPanel = $(
@@ -67,6 +67,28 @@ $navPanel
     resetForms: true,
     side: 'right'
   });
+
+  // Hide/show hamburger when panel opens/closes
+$body.on('click', '#hamburger', function() {
+    // Hide hamburger when clicked
+    $('#hamburger').hide();
+});
+
+// Show hamburger when panel closes
+$body.on('click', '#navPanel .close', function() {
+    setTimeout(function() {
+        $('#hamburger').show();
+    }, 500); // Match the panel delay
+});
+
+// Also show hamburger when clicking outside the panel
+$body.on('click touchend', function(event) {
+    if (!$(event.target).closest('#navPanel, #hamburger').length) {
+        setTimeout(function() {
+            $('#hamburger').show();
+        }, 500);
+    }
+});
 
 // Fix: Remove transitions on WP<10
 if (skel.vars.os == 'wp' && skel.vars.osVersion < 10)
