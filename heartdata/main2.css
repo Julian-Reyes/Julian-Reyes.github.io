@@ -24,7 +24,6 @@ form {
 body {
   line-height: 1;
 }
-
 /* Heart Disease */
 html {
   font-family: "Quattrocento Sans", sans-serif;
@@ -32,36 +31,9 @@ html {
   color: #2e3c43;
 }
 
-
-
-
-
-
-
-
-
-/*NEW CODE*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 svg {
   fill: #2e3c43;
 }
-
 .title {
   font-family: "Quattrocento", serif;
   display: block;
@@ -73,12 +45,10 @@ svg {
   margin-inline-end: 0px;
   font-weight: bold;
 }
-
 .chart-title {
   font-family: "Quattrocento", serif;
   font-size: 1.5em;
 }
-
 .introduction-section-title {
   font-family: "Quattrocento", serif;
   display: block;
@@ -90,11 +60,9 @@ svg {
   margin-inline-end: 0px;
   font-weight: bold;
 }
-
 .introduction {
   line-height: 1.5;
 }
-
 /* Layout */
 .container {
   width: 1280px;
@@ -102,12 +70,10 @@ svg {
   display: flex;
   margin: 0 auto;
 }
-
 .panel-left {
   width: 480px;
   position: relative;
 }
-
 .panel-middle {
   width: 320px;
   display: flex;
@@ -115,9 +81,75 @@ svg {
   align-items: center;
   justify-content: space-around;
 }
-
 .panel-right {
   width: 480px;
+}
+
+/* Mobile layout - stacked */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+  
+  .container {
+    width: 100% !important;
+    height: auto !important;
+    flex-direction: column;
+    gap: 30px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  .panel-left,
+  .panel-middle,
+  .panel-right {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  
+  .panel-left {
+    position: static;
+  }
+  
+  .panel-middle {
+    gap: 20px;
+    padding: 20px 0;
+  }
+  
+  /* Make SVGs take up proper space on mobile */
+  #bubble-chart,
+  #parallel-coordinates {
+    width: 100% !important;
+    height: 770px !important;
+    display: block;
+  }
+  
+  #donut-chart {
+    width: 200px !important;
+    height: 200px !important;
+  }
+  
+  /* Fix dropdown positioning on mobile */
+  #bubble-chart-dropdown {
+    position: static !important;
+    transform: none !important;
+    margin-bottom: 10px;
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .title {
+    font-size: 1.8em;
+  }
+  
+  .introduction {
+    padding: 0 10px;
+  }
 }
 
 /* Bubble Chart */
@@ -127,116 +159,91 @@ svg {
   top: 30px;
   transform: translateX(-50%);
 }
-
 .patient-circle {
   stroke: transparent;
   pointer-events: all;
 }
-
 .patient-circle.presence {
   fill: #e73f74;
 }
-
 .patient-circle.absence {
   fill: #3969ac;
 }
-
 .patient-circle.filtered-out {
   fill: #ddd;
 }
-
 .patient-circle.selected {
   fill: #f2b701;
 }
-
 .filter-option {
   fill: #aaa;
   cursor: pointer;
   font-weight: bold;
 }
-
 .filter-option.selected {
   fill: #f2b701;
 }
-
 /* Parallel Coordinates */
 .patient-path {
   fill: none;
   stroke-width: 1px;
   pointer-events: stroke;
 }
-
 .patient-path.presence {
   stroke: #e73f74;
 }
-
 .patient-path.absence {
   stroke: #3969ac;
 }
-
 .patient-path.filtered-out {
   stroke: #ddd;
 }
-
 .patient-path.selected {
   stroke: #f2b701;
   stroke-width: 3px;
 }
-
 .axis-title {
   font-size: 1rem;
 }
-
 .brush .selection {
   fill: #aaa;
   fill-opacity: 0.7;
 }
-
 .selected-brush .selection {
   fill: #f2b701;
 }
-
 /* Donut Chart */
 .patient-slice.presence {
   fill: #e73f74;
 }
-
 .patient-slice.absence {
   fill: #3969ac;
 }
-
 .patient-slice-label {
   fill: #fff;
 }
-
 /* Count Summary */
 #count-summary {
   width: 100%;
   display: flex;
   justify-content: space-around;
 }
-
 .target {
   text-align: center;
 }
-
 .patient-count {
   font-size: 2.5rem;
   font-weight: bold;
 }
-
 .patient-count.presence {
   color: #e73f74;
 }
-
 .patient-count.absence {
   color: #3969ac;
 }
-
 .patient-count.filtered-out {
   color: #ddd;
 }
-
 /* Tooltip */
 #tooltip {
   position: fixed;
@@ -248,10 +255,8 @@ svg {
   line-height: 1.5;
   border: 1px solid #2e3c43;
 }
-
 .tooltip-entry-header {
   font-weight: bold;
 }
-
 .tooltip-entry-value {
 }
