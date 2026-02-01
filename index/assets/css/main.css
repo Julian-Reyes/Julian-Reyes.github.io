@@ -2936,7 +2936,7 @@
 		}
 
 /* Menu */
-
+/* ---------------------------------- RECENTLY ADDED --------------------------------- */
 	.navPanelToggle {
     text-decoration: none;
     display: none;
@@ -2980,6 +2980,8 @@
         display: block;
     }
 }
+/* ---------------------------------- /RECENTLY ADDED --------------------------------- */
+
 		@media screen and (max-width: 980px) {
 
 			.navPanelToggle {
