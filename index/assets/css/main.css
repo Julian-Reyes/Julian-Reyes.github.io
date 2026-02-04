@@ -2034,6 +2034,15 @@
 			.feature-grid .feature {
 				margin-bottom: 2em;
 			}
+			
+
+
+		}
+		@media screen and (min-width: 980px) {
+
+			#molecular{
+					margin-bottom: 100px;
+				}
 
 		}
 
@@ -2059,11 +2068,12 @@
 
 			.feature-grid .feature {
 				margin-bottom: 1em;
+				margin-bottom: 30px;
 			}
 
 		}
 
-		@media screen and (max-width: 480px) {
+		@media screen and (max-width: 600px) {
 
 			.feature-grid .feature .content,
 			.feature-grid .feature .image {
