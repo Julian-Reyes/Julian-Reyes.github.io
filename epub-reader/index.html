@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Folio — ePub Reader</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <!-- Upload Screen -->
+        <div class="upload-screen" id="uploadScreen">
+            <div class="sample-books" id="sampleBooks">
+                <div class="sample-book" data-src="books/pride-and-prejudice.epub">
+                    <img class="sample-cover" src="books/cover-pride.jpg" alt="Pride and Prejudice" />
+                    <div class="sample-label">Pride &amp; Prejudice</div>
+                </div>
+                <div class="sample-book" data-src="books/the-great-gatsby.epub">
+                    <img class="sample-cover" src="books/cover-gatsby.jpg" alt="The Great Gatsby" />
+                    <div class="sample-label">The Great Gatsby</div>
+                </div>
+                <div class="sample-book" data-src="books/alice-in-wonderland.epub">
+                    <img class="sample-cover" src="books/cover-alice.jpg" alt="Alice in Wonderland" />
+                    <div class="sample-label">Alice in Wonderland</div>
+                </div>
+            </div>
+            <h1>Folio</h1>
+            <div class="tagline">Read as it was meant to feel</div>
+            <div class="upload-zone" id="uploadZone">
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                    <path
+                        d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                    />
+                    <line x1="12" y1="8" x2="12" y2="14" />
+                    <line x1="9" y1="11" x2="15" y2="11" />
+                </svg>
+                <span>Drop an ePub here or click to browse</span>
+                <input type="file" id="fileInput" accept=".epub" />
+            </div>
+        </div>
+
+        <!-- Book Reader -->
+        <div class="book-wrapper" id="bookWrapper">
+            <div class="top-bar">
+                <div class="book-title-display" id="bookTitleDisplay"></div>
+                <div class="top-controls">
+                    <div class="font-size-controls">
+                        <button
+                            class="top-btn"
+                            id="fontDown"
+                            title="Decrease font size"
+                        >
+                            A−
+                        </button>
+                        <span class="font-size-label" id="fontLabel">100%</span>
+                        <button
+                            class="top-btn"
+                            id="fontUp"
+                            title="Increase font size"
+                        >
+                            A+
+                        </button>
+                    </div>
+                    <button
+                        class="top-btn bookmark-btn"
+                        id="bookmarkBtn"
+                        title="Bookmark this page (B)"
+                        aria-label="Bookmark"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            stroke-width="1.6"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M6 3h12v18l-6-4.5L6 21z" />
+                        </svg>
+                    </button>
+                    <button class="top-btn" id="tocBtn">Contents</button>
+                    <button class="top-btn" id="newBookBtn">New Book</button>
+                </div>
+            </div>
+
+            <div class="book">
+                <div class="page-spread">
+                    <div class="page left">
+                        <div class="bookmark-ribbon" id="bookmarkRibbon"></div>
+                        <canvas
+                            class="paper-texture-layer"
+                            id="paperTextureLeft"
+                        ></canvas>
+                        <div class="page-content" id="leftPage"></div>
+                        <div class="page-number" id="leftPageNum"></div>
+                    </div>
+                    <div class="spine-line"></div>
+                    <div class="page right">
+                        <canvas
+                            class="paper-texture-layer"
+                            id="paperTextureRight"
+                        ></canvas>
+                        <div class="page-content" id="rightPage"></div>
+                        <div class="page-number" id="rightPageNum"></div>
+                    </div>
+                </div>
+
+                <div class="nav-zone prev" id="navPrev">
+                    <svg
+                        class="nav-arrow"
+                        viewBox="0 0 24 24"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                </div>
+                <div class="nav-zone next" id="navNext">
+                    <svg
+                        class="nav-arrow"
+                        viewBox="0 0 24 24"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <polyline points="9 6 15 12 9 18" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="bottom-bar">
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-label" id="progressLabel">0%</div>
+            </div>
+        </div>
+
+        <!-- TOC Panel -->
+        <div class="toc-overlay" id="tocOverlay"></div>
+        <div class="toc-panel" id="tocPanel">
+            <div class="toc-header"><h2>Contents</h2></div>
+            <div class="toc-list" id="tocList"></div>
+            <div class="toc-header bookmarks-header"><h2>Bookmarks</h2></div>
+            <div class="bookmark-list" id="bookmarkList"></div>
+        </div>
+
+        <!-- Loading -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-text">Opening book…</div>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>
