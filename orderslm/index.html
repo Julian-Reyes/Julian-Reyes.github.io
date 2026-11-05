@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>OrderSLM | Julian Reyes</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="OrderSLM: a small language model fine-tuned to turn messy restaurant-order chats into exact, menu-checked orders. Case study with every number from saved runs."
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = { darkMode: "class" };
+        </script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="icon" href="../favicon/favicon-dev-32.png" />
+        <style>
+            body {
+                font-family: "Inter", sans-serif;
+                background-color: #0f172a;
+                color: white;
+            }
+            .glass {
+                background: rgba(30, 41, 59, 0.7);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            html.dark .glass {
+                background: #ffffff;
+                border: 1px solid rgba(15, 23, 42, 0.12);
+            }
+            .mono {
+                font-family: "JetBrains Mono", ui-monospace, monospace;
+            }
+            .tbl th,
+            .tbl td {
+                padding: 0.5rem 0.75rem;
+                text-align: left;
+                white-space: nowrap;
+            }
+            .tbl td.num,
+            .tbl th.num {
+                text-align: right;
+                font-variant-numeric: tabular-nums;
+            }
+            .tbl thead th {
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
+                color: #94a3b8;
+                border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+            }
+            .tbl tbody tr {
+                border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+            }
+            .tbl tr.pick td {
+                background: rgba(45, 212, 191, 0.1);
+                font-weight: 600;
+            }
+            .bar {
+                height: 0.6rem;
+                border-radius: 999px;
+                background: #2dd4bf;
+            }
+            .bar.dim {
+                background: #64748b;
+            }
+            .track {
+                background: rgba(148, 163, 184, 0.18);
+                border-radius: 999px;
+            }
+            .bubble {
+                background: #334155;
+                border-radius: 1rem 1rem 1rem 0.25rem;
+            }
+            html.dark .bubble {
+                background: #e2e8f0;
+            }
+            section h2 {
+                scroll-margin-top: 1rem;
+            }
+        </style>
+    </head>
+    <body class="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900">
+        <nav class="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 border-b border-slate-400">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="flex h-16 items-center justify-between">
+                    <div class="flex items-center">
+                        <button
+                            id="mobile-menu-button"
+                            type="button"
+                            aria-label="Menu"
+                            class="sm:hidden inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white"
+                        >
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.5"
+                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                                />
+                            </svg>
+                        </button>
+                        <div class="hidden sm:block">
+                            <div class="flex space-x-4">
+                                <a href="../" class="rounded-md px-3 py-2 text-sm font-medium">Home</a>
+                                <a
+                                    href="../projects/"
+                                    class="rounded-md bg-white dark:bg-slate-900 px-3 py-2 text-sm font-medium text-slate-900 dark:text-white"
+                                    >Projects</a
+                                >
+                                <a href="../#experience" class="rounded-md px-3 py-2 text-sm font-medium">Experience</a>
+                                <a href="../#highlights" class="rounded-md px-3 py-2 text-sm font-medium">Highlights</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-sm">
+                        <div class="hidden sm:block">
+                            <a href="https://www.linkedin.com/in/julian-reyes-1b2727190/" class="px-3">Linked In</a>
+                            <a href="../index/resumes/resume.pdf" class="px-3" target="_blank">Resume</a>
+                        </div>
+                        <button
+                            onclick="toggleTheme()"
+                            class="flex items-center gap-2 rounded-full px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white text-sm transition font-medium border border-transparent hover:border-teal-500/50"
+                        >
+                            <span class="dark:hidden">☀️ Light Mode</span>
+                            <span class="hidden dark:inline">🌙 Dark Mode</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden sm:hidden bg-gray-800 border-t border-white/5">
+                <div class="space-y-1 px-2 pt-2 pb-3">
+                    <a href="../" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300">Home</a>
+                    <a href="../projects/" class="block rounded-md bg-gray-950/50 px-3 py-2 text-base font-medium text-white"
+                        >Projects</a
+                    >
+                    <a href="../index.html#experience" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300"
+                        >Experience</a
+                    >
+                    <a href="https://www.linkedin.com/in/julian-reyes-1b2727190/" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300"
+                        >Linked In</a
+                    >
+                    <a href="../index/resumes/resume.pdf" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300" target="_blank"
+                        >Resume</a
+                    >
+                </div>
+            </div>
+        </nav>
+
+        <main class="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-16">
+            <!-- ============================== HERO ============================== -->
+            <header class="space-y-6">
+                <p class="text-teal-400 font-bold uppercase tracking-widest text-sm">Case study · AI / ML engineering · Oct–Nov 2026</p>
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tighter leading-none">
+                    OrderSLM<br /><span class="text-teal-400">A small AI model that takes food orders from chat</span>
+                </h1>
+                <p class="text-lg text-slate-300 dark:text-slate-600 max-w-3xl leading-relaxed">
+                    Customers text restaurants things like <em>"CAN I GET A MEDIUM DRIP COFFE… ACTUALLY MAKE IT 2 MUFFINS"</em>. I built
+                    a system that turns chats like that into an exact, menu-checked order, using a
+                    <strong>0.8-billion-parameter model I fine-tuned</strong> that's small enough to run on a laptop. Prices and totals
+                    are always computed by code, never by the AI. I measured every choice along the way: which big model teaches
+                    best per dollar, which small model learns best, and what shrinking it for deployment costs.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <a
+                        href="https://github.com/Julian-Reyes/orderSLM"
+                        target="_blank"
+                        class="bg-teal-500 text-slate-900 px-6 py-3 rounded-full font-bold uppercase text-sm tracking-widest hover:bg-teal-400 transition"
+                        >View the code</a
+                    >
+                    <a
+                        href="data.json"
+                        class="border border-teal-500/50 text-teal-400 px-6 py-3 rounded-full font-bold uppercase text-sm tracking-widest hover:bg-teal-500/10 transition"
+                        >The data behind this page</a
+                    >
+                </div>
+            </header>
+
+            <!-- stat tiles -->
+            <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="glass rounded-2xl p-5">
+                    <div class="text-3xl font-extrabold text-teal-400">77%</div>
+                    <div class="text-sm text-slate-300 dark:text-slate-600 mt-1">
+                        orders fully correct on 90 new chats (69/90), every item, size, time and payment
+                    </div>
+                </div>
+                <div class="glass rounded-2xl p-5">
+                    <div class="text-3xl font-extrabold text-teal-400">92%</div>
+                    <div class="text-sm text-slate-300 dark:text-slate-600 mt-1">
+                        of 278 customer messages understood correctly (order, question, complaint…)
+                    </div>
+                </div>
+                <div class="glass rounded-2xl p-5">
+                    <div class="text-3xl font-extrabold text-teal-400">0.81 GB</div>
+                    <div class="text-sm text-slate-300 dark:text-slate-600 mt-1">
+                        final model file, 2.6 s per answer on a T4 GPU (5× faster than before packaging)
+                    </div>
+                </div>
+                <div class="glass rounded-2xl p-5">
+                    <div class="text-3xl font-extrabold text-teal-400">$6.63</div>
+                    <div class="text-sm text-slate-300 dark:text-slate-600 mt-1">
+                        total AI API spend for the whole project so far; training ran free on Kaggle GPUs
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================== EXAMPLE ============================== -->
+            <section class="space-y-6">
+                <h2 class="text-3xl font-bold">What it does</h2>
+                <p class="text-slate-300 dark:text-slate-600 max-w-3xl">
+                    A real example from the evaluation set, answered by the final model. The chat is a written test conversation, not
+                    a real customer. (1) The four messages it got. (2) What the model proposed, with a quote from the chat backing each
+                    fact. (3) The code checks that against the menu and computes the price.
+                </p>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="glass rounded-2xl p-5 space-y-3">
+                        <div class="text-xs uppercase tracking-widest text-slate-400">1 · The chat (Morning Crumb Café)</div>
+                        <div class="bubble px-4 py-2 text-sm w-fit">CAN I GET A MEDIUM DRIP COFFE AND A BLUBERRY MUFFIN</div>
+                        <div class="bubble px-4 py-2 text-sm w-fit">PICKUP AT 8:45 FOR ANA</div>
+                        <div class="bubble px-4 py-2 text-sm w-fit">ACTUALLY MAKE IT 2 MUFFINS</div>
+                        <div class="bubble px-4 py-2 text-sm w-fit">CARD</div>
+                    </div>
+                    <div class="glass rounded-2xl p-5 space-y-3">
+                        <div class="text-xs uppercase tracking-widest text-slate-400">2 · The model's proposal</div>
+                        <ul class="text-sm space-y-2">
+                            <li>
+                                <span class="mono text-teal-400">drip_coffee</span> · medium · ×1<br /><span class="text-slate-400 text-xs"
+                                    >"A MEDIUM DRIP COFFE"</span
+                                >
+                            </li>
+                            <li>
+                                <span class="mono text-teal-400">muffin</span> · blueberry · <strong>×2</strong><br /><span
+                                    class="text-slate-400 text-xs"
+                                    >"A BLUBERRY MUFFIN", "2 MUFFINS"</span
+                                >
+                            </li>
+                            <li>pickup at <span class="mono">08:45</span> · name <strong>Ana</strong> · pays by <strong>card</strong></li>
+                            <li class="text-slate-400 text-xs">intent: PLACE_ORDER · typos, caps and the change of mind all handled</li>
+                        </ul>
+                    </div>
+                    <div class="glass rounded-2xl p-5 space-y-3">
+                        <div class="text-xs uppercase tracking-widest text-slate-400">3 · Checked and priced by code</div>
+                        <table class="w-full text-sm">
+                            <tr>
+                                <td>Drip Coffee, Medium 12 oz</td>
+                                <td class="text-right">$2.75</td>
+                            </tr>
+                            <tr>
+                                <td>2 × Muffin, Blueberry</td>
+                                <td class="text-right">$6.50</td>
+                            </tr>
+                            <tr class="border-t border-slate-500/40 font-bold">
+                                <td class="pt-2">Total (pickup)</td>
+                                <td class="pt-2 text-right text-teal-400">$9.25</td>
+                            </tr>
+                        </table>
+                        <p class="text-xs text-slate-400">
+                            Matches the hand-checked answer exactly. The model never sees or writes a price.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================== HOW IT WORKS ============================== -->
+            <section class="space-y-6">
+                <h2 class="text-3xl font-bold">How it works</h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 text-sm">
+                    <div class="glass rounded-2xl p-4">
+                        <div class="text-teal-400 font-bold">Chat</div>
+                        <p class="text-slate-300 dark:text-slate-600 mt-1">Messy, multi-message customer text.</p>
+                    </div>
+                    <div class="glass rounded-2xl p-4 border-teal-500/40">
+                        <div class="text-teal-400 font-bold">Small model</div>
+                        <p class="text-slate-300 dark:text-slate-600 mt-1">
+                            Proposes the order and the message's intent, quoting the chat for every fact.
+                        </p>
+                    </div>
+                    <div class="glass rounded-2xl p-4">
+                        <div class="text-teal-400 font-bold">Code checks</div>
+                        <p class="text-slate-300 dark:text-slate-600 mt-1">
+                            Items, sizes and add-ons must exist on the menu; anything unknown becomes a question.
+                        </p>
+                    </div>
+                    <div class="glass rounded-2xl p-4">
+                        <div class="text-teal-400 font-bold">Pricing engine</div>
+                        <p class="text-slate-300 dark:text-slate-600 mt-1">Totals, fees and change in integer cents.</p>
+                    </div>
+                    <div class="glass rounded-2xl p-4">
+                        <div class="text-teal-400 font-bold">Reply</div>
+                        <p class="text-slate-300 dark:text-slate-600 mt-1">States only verified facts, asks for what's missing.</p>
+                    </div>
+                </div>
+                <p class="text-slate-300 dark:text-slate-600 max-w-3xl">
+                    <strong>The design rule:</strong> the AI only <em>proposes</em>. Anything with money or menu facts is decided by
+                    tested, deterministic code, so a model mistake turns into a clarifying question, not a wrong charge. A customer
+                    saying "I already paid" is recorded as a claim, never as a payment.
+                </p>
+            </section>
+
+            <!-- ============================== PROCESS ============================== -->
+            <section class="space-y-6">
+                <h2 class="text-3xl font-bold">How I built it</h2>
+                <p class="text-slate-300 dark:text-slate-600 max-w-3xl">
+                    The approach is <strong>distillation</strong>: a large, paid model (the "teacher") labels thousands of practice
+                    chats, and a small open model (the "student") is fine-tuned to copy it. Then you can run the small one yourself,
+                    cheaply and privately. Each step below was a measured experiment.
+                </p>
+
+                <!-- step 1 -->
+                <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
+                    <div class="text-teal-400 font-bold uppercase tracking-widest text-xs">Step 1 · Test data before anything else</div>
+                    <h3 class="text-2xl font-bold">Build the exam first</h3>
+                    <p class="text-slate-300 dark:text-slate-600">
+                        I designed 3 fictional restaurants (a pizzeria, a burger place, a café) with real menu rules: sizes, add-ons,
+                        half-and-half pizzas, combos, delivery minimums. Then I had Claude write conversations from scenario cards and
+                        reviewed every expected answer by hand in an annotation tool I built (Preact + FastAPI):
+                    </p>
+                    <ul class="grid sm:grid-cols-3 gap-3 text-sm">
+                        <li class="rounded-xl border border-slate-600/50 p-3">
+                            <strong>Dev: 91 chats</strong>, 268 messages<br /><span class="text-slate-400">for tuning prompts and code</span>
+                        </li>
+                        <li class="rounded-xl border border-slate-600/50 p-3">
+                            <strong>Fresh: 90 chats</strong>, 278 messages<br /><span class="text-slate-400"
+                                >written after the fixes, to check they generalize</span
+                            >
+                        </li>
+                        <li class="rounded-xl border border-slate-600/50 p-3">
+                            <strong>Test: 199 chats, sealed</strong><br /><span class="text-slate-400"
+                                >locked by hash; opened once, at the very end</span
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- step 2: teacher bake-off -->
+                <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
+                    <div class="text-teal-400 font-bold uppercase tracking-widest text-xs">Step 2 · Teacher bake-off</div>
+                    <h3 class="text-2xl font-bold">Which big model labels best per dollar?</h3>
+                    <p class="text-slate-300 dark:text-slate-600">
+                        12 settings across 4 providers (OpenAI, Anthropic, Google, DeepSeek), same prompt, same 35 chats. "Fully
+                        correct" means the entire order matches. Arrows show the gain from my code rules (e.g. filling in a default
+                        size), with no extra API calls.
+                    </p>
+                    <div class="overflow-x-auto">
+                        <table class="tbl text-sm w-full">
+                            <thead>
+                                <tr>
+                                    <th>Model · reasoning setting</th>
+                                    <th class="num">Cost / 1,000 chats</th>
+                                    <th class="num">Fully correct (of 35)</th>
+                                    <th class="num">Item F1</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>DeepSeek Flash · none</td><td class="num">$0.38</td><td class="num">25 → 27</td><td class="num">80.7 → 88.1%</td></tr>
+                                <tr><td>GPT-6 Luna · none</td><td class="num">$0.58</td><td class="num">30 → 32</td><td class="num">97.4%</td></tr>
+                                <tr class="pick"><td>GPT-6 Luna · low ✓ picked</td><td class="num">$0.63</td><td class="num">32</td><td class="num">98.3%</td></tr>
+                                <tr><td>GPT-6 Luna · medium</td><td class="num">$0.74</td><td class="num">29 → 30</td><td class="num">90.1 → 93.7%</td></tr>
+                                <tr><td>DeepSeek Flash · low</td><td class="num">$0.84</td><td class="num">33</td><td class="num">95.5%</td></tr>
+                                <tr><td>DeepSeek Flash · high</td><td class="num">$0.88</td><td class="num">29 → 32</td><td class="num">84.1 → 91.6%</td></tr>
+                                <tr><td>Claude Haiku 5.5 · thinking off, medium</td><td class="num">$1.53</td><td class="num">22 → 27</td><td class="num">90.9 → 96.6%</td></tr>
+                                <tr><td>Claude Haiku 5.5 · thinking off, low</td><td class="num">$1.54</td><td class="num">21 → 27</td><td class="num">91.4 → 94.8%</td></tr>
+                                <tr><td>Claude Haiku 5.5 · thinking low</td><td class="num">$1.82</td><td class="num">31</td><td class="num">96.4%</td></tr>
+                                <tr><td>Claude Haiku 5.5 · thinking medium</td><td class="num">$1.90</td><td class="num">33</td><td class="num">100%</td></tr>
+                                <tr><td>Gemini 3.1 Flash-Lite · minimal</td><td class="num">$2.82</td><td class="num">17 → 24</td><td class="num">74.1 → 90.7%</td></tr>
+                                <tr><td>Gemini 3.1 Flash-Lite · default</td><td class="num">$2.94</td><td class="num">22 → 28</td><td class="num">78.2 → 94.5%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-300 dark:text-slate-600">
+                        <li>
+                            <strong>Picked GPT-6 Luna (low).</strong> It tied the most accurate setting in a 51-chat head-to-head at about a
+                            third of the cost. After two prompt fixes it got <strong>90 of 91</strong> dev orders fully correct.
+                        </li>
+                        <li><strong>More reasoning wasn't better:</strong> the "medium" and "high" settings scored below "low".</li>
+                        <li>
+                            <strong>Code rules beat prompt tweaks</strong> where models had the facts but misapplied a rule (Gemini +6–7,
+                            Haiku +5–6 orders).
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- step 3: data -->
+                <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
+                    <div class="text-teal-400 font-bold uppercase tracking-widest text-xs">Step 3 · Training data</div>
+                    <h3 class="text-2xl font-bold">2,528 synthetic practice chats</h3>
+                    <p class="text-slate-300 dark:text-slate-600">
+                        Three cheaper models wrote practice conversations from generated scenario cards (so the style varies), and the
+                        teacher labeled them. Automatic checks dropped bad ones: invalid output, a business message stating a price,
+                        near-duplicates, labels quoting text that isn't in the chat. Independent AI auditors flagged doubtful labels for
+                        me to review; 47 labels were fixed by hand.
+                    </p>
+                    <div class="space-y-2 text-sm max-w-xl">
+                        <div class="flex items-center gap-3">
+                            <span class="w-40 shrink-0">DeepSeek Flash</span>
+                            <div class="track flex-1"><div class="bar" style="width: 66%"></div></div>
+                            <span class="w-12 text-right tabular-nums">1,662</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-40 shrink-0">Gemini Flash-Lite</span>
+                            <div class="track flex-1"><div class="bar" style="width: 17%"></div></div>
+                            <span class="w-12 text-right tabular-nums">419</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-40 shrink-0">Claude Haiku</span>
+                            <div class="track flex-1"><div class="bar" style="width: 13%"></div></div>
+                            <span class="w-12 text-right tabular-nums">329</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-40 shrink-0">Targeted hard cases</span>
+                            <div class="track flex-1"><div class="bar" style="width: 4.7%"></div></div>
+                            <span class="w-12 text-right tabular-nums">118</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400">
+                        Training chats by writer (v2 data). The evaluation chats were never used as training input.
+                    </p>
+                </div>
+
+                <!-- step 4: student bake-off -->
+                <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
+                    <div class="text-teal-400 font-bold uppercase tracking-widest text-xs">Step 4 · Student bake-off</div>
+                    <h3 class="text-2xl font-bold">Can a small model do it out of the box? No.</h3>
+                    <p class="text-slate-300 dark:text-slate-600">
+                        Four small open models got the teacher's exact instructions on 20 chats, with no training. None produced a
+                        usable order: the 0.8B looped until it hit its length limit on every chat. Fine-tuning was required.
+                    </p>
+                    <div class="overflow-x-auto">
+                        <table class="tbl text-sm w-full">
+                            <thead>
+                                <tr><th>Model</th><th class="num">Size</th><th class="num">Valid JSON</th><th class="num">Usable labels</th><th class="num">Median time</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Qwen3.5-0.8B</td><td class="num">0.85B</td><td class="num">0/20</td><td class="num">0/20</td><td class="num">185 s</td></tr>
+                                <tr><td>Qwen3.5-2B</td><td class="num">2.2B</td><td class="num">19/20</td><td class="num">3/20</td><td class="num">59 s</td></tr>
+                                <tr><td>Qwen3-1.7B</td><td class="num">1.7B</td><td class="num">20/20</td><td class="num">0/20</td><td class="num">87 s</td></tr>
+                                <tr><td>Gemma 4 E2B</td><td class="num">5.1B</td><td class="num">11/20</td><td class="num">0/20</td><td class="num">923 s</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- step 5: fine-tuning -->
+                <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
+                    <div class="text-teal-400 font-bold uppercase tracking-widest text-xs">Step 5 · Fine-tuning (LoRA) on free GPUs</div>
+                    <h3 class="text-2xl font-bold">Train, study the mistakes, fix the data, retrain</h3>
+                    <p class="text-slate-300 dark:text-slate-600">
+                        I trained three students with LoRA (PyTorch, Hugging Face transformers + PEFT) on Kaggle's free T4 GPUs, in
+                        resumable sessions under its 12-hour limit. Version 1 got the format right but missed patterns. So I sorted every
+                        dev mistake into categories, found that they came from thin training data (e.g. too few "actually, change
+                        that" chats), and wrote targeted data for those cases. Version 2, measured on the fresh chats:
+                    </p>
+                    <div class="space-y-4 text-sm max-w-2xl">
+                        <div>
+                            <div class="flex justify-between"><span><strong>Qwen3.5-0.8B</strong> (picked)</span><span class="tabular-nums">54 → <strong class="text-teal-400">69</strong> / 90</span></div>
+                            <div class="track mt-1"><div class="bar dim" style="width: 60.0%"></div></div>
+                            <div class="track mt-1"><div class="bar" style="width: 76.7%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between"><span>Qwen3.5-2B</span><span class="tabular-nums">51 → <strong class="text-teal-400">69</strong> / 90</span></div>
+                            <div class="track mt-1"><div class="bar dim" style="width: 56.7%"></div></div>
+                            <div class="track mt-1"><div class="bar" style="width: 76.7%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between"><span>Qwen3.5-2B, mixed menus</span><span class="tabular-nums">52 → <strong class="text-teal-400">70</strong> / 90</span></div>
+                            <div class="track mt-1"><div class="bar dim" style="width: 57.8%"></div></div>
+                            <div class="track mt-1"><div class="bar" style="width: 77.8%"></div></div>
+                        </div>
+                        <p class="text-xs text-slate-400">Fully correct orders on the 90 fresh chats: grey = v1 data, teal = v2 data.</p>
+                    </div>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-300 dark:text-slate-600">
+                        <li><strong>Better data gave +15 to +18 orders for every model</strong>, all statistically significant (paired tests).</li>
+                        <li>
+                            <strong>The 2.6× bigger model wasn't better:</strong> the three v2 students don't differ significantly, so I
+                            picked the smallest: Qwen3.5-0.8B (69/90 fresh, 92% of messages understood; the teacher gets 90/91 on dev).
+                        </li>
+                    </ul>
+                    <details class="text-sm">
+                        <summary class="cursor-pointer text-teal-400 font-semibold">All six trained models, dev and fresh</summary>
+                        <div class="overflow-x-auto mt-3">
+                            <table class="tbl w-full">
+                                <thead>
+                                    <tr><th>Student</th><th class="num">Dev fully correct (91)</th><th class="num">Fresh fully correct (90)</th><th class="num">Fresh intents (278)</th><th class="num">Fresh invalid answers</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Qwen3.5-0.8B · v1</td><td class="num">63</td><td class="num">54</td><td class="num">248</td><td class="num">9</td></tr>
+                                    <tr><td>Qwen3.5-2B · v1</td><td class="num">59</td><td class="num">51</td><td class="num">248</td><td class="num">10</td></tr>
+                                    <tr><td>Qwen3.5-2B mixed · v1</td><td class="num">65</td><td class="num">52</td><td class="num">252</td><td class="num">5</td></tr>
+                                    <tr class="pick"><td>Qwen3.5-0.8B · v2 ✓</td><td class="num">69</td><td class="num">69</td><td class="num">256</td><td class="num">7</td></tr>
+                                    <tr><td>Qwen3.5-2B · v2</td><td class="num">69</td><td class="num">69</td><td class="num">263</td><td class="num">3</td></tr>
+                                    <tr><td>Qwen3.5-2B mixed · v2</td><td class="num">73</td><td class="num">70</td><td class="num">257</td><td class="num">8</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- step 6: checker -->
+                <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
+                    <div class="text-teal-400 font-bold uppercase tracking-widest text-xs">Step 6 · A safety net</div>
+                    <h3 class="text-2xl font-bold">Can a second model catch the small model's mistakes?</h3>
+                    <p class="text-slate-300 dark:text-slate-600">
+                        I showed three checkers 42 orders the student got wrong and 42 it got right (with the chat and menu) and asked
+                        "does this order match?". A checker that flags most wrong orders but few right ones could trigger a
+                        confirmation question only when needed.
+                    </p>
+                    <div class="overflow-x-auto">
+                        <table class="tbl text-sm w-full">
+                            <thead><tr><th>Checker</th><th class="num">Wrong orders caught</th><th class="num">False alarms on right orders</th></tr></thead>
+                            <tbody>
+                                <tr><td>GPT-6 Luna (LLM)</td><td class="num">33 / 42</td><td class="num">6 / 42</td></tr>
+                                <tr><td>Jev (decision model)</td><td class="num">28 / 42</td><td class="num">2 / 42</td></tr>
+                                <tr><td>OpenAI Decisions</td><td class="num">25 / 42</td><td class="num">4 / 42</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-slate-400">The whole run cost under 3 cents. Building it also exposed a scoring gap, which I fixed.</p>
+                </div>
+
+                <!-- step 7: packaging -->
+                <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
+                    <div class="text-teal-400 font-bold uppercase tracking-widest text-xs">Step 7 · Packaging for deployment</div>
+                    <h3 class="text-2xl font-bold">Shrink it without losing accuracy</h3>
+                    <p class="text-slate-300 dark:text-slate-600">
+                        I merged the trained adapter into the model, converted it to GGUF and compressed (quantized) it with llama.cpp,
+                        then re-ran every evaluation chat through each version. Columns: fully correct orders on dev and fresh, typical
+                        seconds per answer on a T4 GPU and on a 4-core CPU, and peak GPU memory.
+                    </p>
+                    <div class="overflow-x-auto">
+                        <table class="tbl text-sm w-full">
+                            <thead>
+                                <tr><th>Version</th><th class="num">Size</th><th class="num">Dev (91)</th><th class="num">Fresh (90)</th><th class="num">T4 GPU</th><th class="num">GPU mem.</th><th class="num">CPU</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Original (16-bit)</td><td class="num">1.5 GB</td><td class="num">69</td><td class="num">69</td><td class="num">13.5 s</td><td class="num"></td><td class="num"></td></tr>
+                                <tr><td>F16 GGUF</td><td class="num">1.52 GB</td><td class="num">69</td><td class="num">69</td><td class="num">3.9 s</td><td class="num">1.74 GB</td><td class="num"></td></tr>
+                                <tr class="pick"><td>Q8_0 (8-bit) ✓ shipped</td><td class="num">0.81 GB</td><td class="num">69</td><td class="num">69</td><td class="num">2.6 s</td><td class="num">1.05 GB</td><td class="num">50 s</td></tr>
+                                <tr><td>Q4_K_M (4-bit)</td><td class="num">0.53 GB</td><td class="num">66</td><td class="num">66</td><td class="num">2.3 s</td><td class="num">0.78 GB</td><td class="num">39 s</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-300 dark:text-slate-600">
+                        <li>
+                            <strong>8-bit gives identical orders</strong> to the original on both sets (not one chat differs), at half the size
+                            and 5× the speed.
+                        </li>
+                        <li>4-bit saves 0.28 GB more but drops 3 orders per set (not statistically significant), so 8-bit ships.</li>
+                        <li>
+                            CPU-only is too slow for live chat as measured; most of the time goes to re-reading the long menu prompt.
+                            Caching that prompt and Apple Silicon are next.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ============================== ENGINEERING ============================== -->
+            <section class="space-y-6">
+                <h2 class="text-3xl font-bold">Engineering highlights</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="glass rounded-2xl p-5 space-y-2">
+                        <h3 class="font-bold text-teal-400">A silent GPU failure, found by a guard</h3>
+                        <p class="text-sm text-slate-300 dark:text-slate-600">
+                            The first packaging run spent 11 hours "on the GPU" while actually running on the CPU: my script had replaced the
+                            system's library path, hiding the NVIDIA driver, and llama.cpp fell back without an error. I added stop rules
+                            (check the GPU is visible, check memory and speed after the first answer). The next attempt stopped itself in 4
+                            minutes and logged the missing library. The fixed run took 2.2 hours.
+                        </p>
+                    </div>
+                    <div class="glass rounded-2xl p-5 space-y-2">
+                        <h3 class="font-bold text-teal-400">Honest evaluation</h3>
+                        <p class="text-sm text-slate-300 dark:text-slate-600">
+                            Separate tuning, fresh and sealed test sets; paired statistical tests with confidence intervals rather than
+                            eyeballing; every number regenerated by code from saved run outputs. When a fresh chat led to a fix, its gain is
+                            labeled "used for fixes", not reported as a clean result.
+                        </p>
+                    </div>
+                    <div class="glass rounded-2xl p-5 space-y-2">
+                        <h3 class="font-bold text-teal-400">Training under a 12-hour limit</h3>
+                        <p class="text-sm text-slate-300 dark:text-slate-600">
+                            Kaggle sessions stop at 12 hours, so training checkpoints itself, including its random-number state, and resumes
+                            in the next session. Along the way I fixed an upload that silently dropped subfolders and a resume bug in the
+                            random-number state.
+                        </p>
+                    </div>
+                    <div class="glass rounded-2xl p-5 space-y-2">
+                        <h3 class="font-bold text-teal-400">Cost discipline</h3>
+                        <p class="text-sm text-slate-300 dark:text-slate-600">
+                            Every paid call was estimated first and logged afterwards from real token counts and verified prices. Total AI API
+                            spend so far is $6.63 against a $10 budget. All training and model evaluation ran on free GPUs.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================== STACK + NEXT ============================== -->
+            <section class="grid md:grid-cols-2 gap-6">
+                <div class="space-y-3">
+                    <h2 class="text-3xl font-bold">Stack</h2>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <span class="rounded-full border border-teal-500/40 px-3 py-1">Python 3.12</span>
+                        <span class="rounded-full border border-teal-500/40 px-3 py-1">Pydantic v2 contracts</span>
+                        <span class="rounded-full border border-teal-500/40 px-3 py-1">PyTorch</span>
+                        <span class="rounded-full border border-teal-500/40 px-3 py-1">Hugging Face transformers + PEFT (LoRA)</span>
+                        <span class="rounded-full border border-teal-500/40 px-3 py-1">llama.cpp / GGUF</span>
+                        <span class="rounded-full border border-teal-500/40 px-3 py-1">Kaggle T4 GPUs</span>
+                        <span class="rounded-full border border-teal-500/40 px-3 py-1">OpenAI · Anthropic · Gemini · DeepSeek APIs</span>
+                        <span class="rounded-full border border-teal-500/40 px-3 py-1">FastAPI + Preact (annotation tool)</span>
+                        <span class="rounded-full border border-teal-500/40 px-3 py-1">pytest: 547 tests</span>
+                    </div>
+                    <p class="text-sm text-slate-400">About 17,000 lines of Python plus 6,800 lines of tests, 150+ commits since Oct 7, 2026.</p>
+                </div>
+                <div class="space-y-3">
+                    <h2 class="text-3xl font-bold">What's next</h2>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-300 dark:text-slate-600">
+                        <li>Run it on a Mac mini (Apple Silicon) with prompt caching for chat-speed replies.</li>
+                        <li>Benchmark small decision models as a message router.</li>
+                        <li>A live chat demo and a public model release.</li>
+                        <li>The final, one-time score on the sealed 199-chat test set.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <footer class="border-t border-slate-600/50 pt-6 text-xs text-slate-400 space-y-2">
+                <p>
+                    <strong>About the numbers.</strong> Dev results guided tuning. Fresh chats were written after the dev-based fixes and
+                    reviewed by me; a few of them also led to code fixes, so they're not perfectly clean held-out data. The sealed test
+                    set hasn't been used yet. Every number on this page is generated from saved run outputs:
+                    <a class="text-teal-400 underline" href="data.json">data.json</a> (made by <span class="mono">make site-data</span> in the repo).
+                </p>
+                <p>Status as of November 5, 2026. The chats are written test data; no real customer conversations are used anywhere.</p>
+            </footer>
+        </main>
+        <script src="../projects/assets/js/projects2.js"></script>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="OrderSLM: a messy chat becomes a checked, priced order">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#134e4a"/></linearGradient>
+  </defs>
+  <rect width="800" height="450" rx="18" fill="url(#bg)"/>
+  <g font-family="ui-monospace, Menlo, monospace" font-size="15" fill="#f8fafc">
+    <rect x="36" y="60" width="300" height="40" rx="14" fill="#334155"/><text x="52" y="86">MEDIUM DRIP COFFE + MUFFIN</text>
+    <rect x="36" y="112" width="220" height="40" rx="14" fill="#334155"/><text x="52" y="138">PICKUP AT 8:45 FOR ANA</text>
+    <rect x="36" y="164" width="250" height="40" rx="14" fill="#334155"/><text x="52" y="190">ACTUALLY MAKE IT 2</text>
+    <rect x="36" y="216" width="90" height="40" rx="14" fill="#334155"/><text x="52" y="242">CARD</text>
+  </g>
+  <g fill="#2dd4bf"><path d="M352 160 h44 v-12 l22 22 -22 22 v-12 h-44z"/></g>
+  <rect x="436" y="52" width="328" height="212" rx="14" fill="#0b1220" stroke="#2dd4bf" stroke-opacity=".5"/>
+  <g font-family="ui-monospace, Menlo, monospace" font-size="15">
+    <text x="456" y="84" fill="#94a3b8">order</text>
+    <text x="456" y="112" fill="#2dd4bf">drip_coffee</text><text x="600" y="112" fill="#e2e8f0">medium ×1</text>
+    <text x="456" y="138" fill="#2dd4bf">muffin</text><text x="600" y="138" fill="#e2e8f0">blueberry ×2</text>
+    <text x="456" y="164" fill="#e2e8f0">pickup 08:45 · Ana · card</text>
+    <line x1="456" y1="186" x2="744" y2="186" stroke="#475569"/>
+    <text x="456" y="214" fill="#94a3b8">priced by code</text><text x="672" y="214" fill="#2dd4bf" font-weight="700">$9.25</text>
+    <text x="456" y="242" fill="#94a3b8">exact match ✓</text>
+  </g>
+  <g font-family="Inter, system-ui, sans-serif" fill="#f8fafc">
+    <text x="36" y="340" font-size="44" font-weight="800">OrderSLM</text>
+    <text x="36" y="378" font-size="19" fill="#99f6e4">fine-tuned 0.8B model · 0.81 GB · 77% fully correct orders</text>
+    <text x="36" y="406" font-size="15" fill="#94a3b8">distillation · LoRA · llama.cpp · evaluation</text>
+  </g>
+</svg>
