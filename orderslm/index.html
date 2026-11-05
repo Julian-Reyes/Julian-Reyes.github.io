@@ -79,8 +79,52 @@
             html.dark .bubble {
                 background: #e2e8f0;
             }
-            section h2 {
-                scroll-margin-top: 1rem;
+            [id] {
+                scroll-margin-top: 4.5rem;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+            .subnav {
+                background: rgba(15, 23, 42, 0.88);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+            }
+            html.dark .subnav {
+                background: rgba(241, 245, 249, 0.92);
+                border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+            }
+            .subnav-links {
+                scrollbar-width: none;
+            }
+            .subnav-links::-webkit-scrollbar {
+                display: none;
+            }
+            .subnav a.link {
+                color: #cbd5e1;
+                white-space: nowrap;
+                padding: 0.25rem 0.1rem;
+                border-bottom: 2px solid transparent;
+            }
+            html.dark .subnav a.link {
+                color: #475569;
+            }
+            .subnav a.link:hover {
+                color: #2dd4bf;
+            }
+            .subnav a.link.active {
+                color: #2dd4bf;
+                border-bottom-color: #2dd4bf;
+            }
+            html.dark .subnav a.link:hover,
+            html.dark .subnav a.link.active {
+                color: #0d9488;
+                border-bottom-color: #0d9488;
+            }
+            @media (prefers-reduced-motion: reduce) {
+                html {
+                    scroll-behavior: auto;
+                }
             }
         </style>
     </head>
@@ -151,9 +195,30 @@
             </div>
         </nav>
 
+        <!-- ============================== SUB-NAV (section links, stays on screen) ============================== -->
+        <div class="subnav sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center gap-6">
+                <a href="#top" class="shrink-0 font-extrabold text-teal-400">OrderSLM</a>
+                <nav aria-label="Case study sections" class="subnav-links flex-1 min-w-0 overflow-x-auto flex items-center gap-4 text-sm">
+                    <a class="link" href="#results">Results</a>
+                    <a class="link" href="#example">Example</a>
+                    <a class="link" href="#how">How it works</a>
+                    <a class="link" href="#test-data">Test data</a>
+                    <a class="link" href="#teacher">Teacher models</a>
+                    <a class="link" href="#training">Training</a>
+                    <a class="link" href="#students">Small models</a>
+                    <a class="link" href="#finetune">Fine-tuning</a>
+                    <a class="link" href="#checker">Safety net</a>
+                    <a class="link" href="#packaging">Packaging</a>
+                    <a class="link" href="#highlights">Highlights</a>
+                    <a class="link" href="#stack">Stack</a>
+                </nav>
+            </div>
+        </div>
+
         <main class="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-16">
             <!-- ============================== HERO ============================== -->
-            <header class="space-y-6">
+            <header id="top" class="space-y-6">
                 <p class="text-teal-400 font-bold uppercase tracking-widest text-sm">Case study · AI / ML engineering · Oct–Nov 2026</p>
                 <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tighter leading-none">
                     OrderSLM<br /><span class="text-teal-400">A small AI model that takes food orders from chat</span>
@@ -181,7 +246,7 @@
             </header>
 
             <!-- stat tiles -->
-            <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <section id="results" class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="glass rounded-2xl p-5">
                     <div class="text-3xl font-extrabold text-teal-400">77%</div>
                     <div class="text-sm text-slate-300 dark:text-slate-600 mt-1">
@@ -209,7 +274,7 @@
             </section>
 
             <!-- ============================== EXAMPLE ============================== -->
-            <section class="space-y-6">
+            <section id="example" class="space-y-6">
                 <h2 class="text-3xl font-bold">What it does</h2>
                 <p class="text-slate-300 dark:text-slate-600 max-w-3xl">
                     A real example from the evaluation set, answered by the final model. The chat is a written test conversation, not
@@ -266,7 +331,7 @@
             </section>
 
             <!-- ============================== HOW IT WORKS ============================== -->
-            <section class="space-y-6">
+            <section id="how" class="space-y-6">
                 <h2 class="text-3xl font-bold">How it works</h2>
                 <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 text-sm">
                     <div class="glass rounded-2xl p-4">
@@ -302,7 +367,7 @@
             </section>
 
             <!-- ============================== PROCESS ============================== -->
-            <section class="space-y-6">
+            <section id="built" class="space-y-6">
                 <h2 class="text-3xl font-bold">How I built it</h2>
                 <p class="text-slate-300 dark:text-slate-600 max-w-3xl">
                     The approach is <strong>distillation</strong>: a large, paid model (the "teacher") labels thousands of practice
@@ -311,7 +376,7 @@
                 </p>
 
                 <!-- step 1 -->
-                <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
+                <div id="test-data" class="glass rounded-3xl p-6 sm:p-8 space-y-4">
                     <div class="text-teal-400 font-bold uppercase tracking-widest text-xs">Step 1 · Test data before anything else</div>
                     <h3 class="text-2xl font-bold">Build the exam first</h3>
                     <p class="text-slate-300 dark:text-slate-600">
@@ -337,7 +402,7 @@
                 </div>
 
                 <!-- step 2: teacher bake-off -->
-                <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
+                <div id="teacher" class="glass rounded-3xl p-6 sm:p-8 space-y-4">
                     <div class="text-teal-400 font-bold uppercase tracking-widest text-xs">Step 2 · Teacher bake-off</div>
                     <h3 class="text-2xl font-bold">Which big model labels best per dollar?</h3>
                     <p class="text-slate-300 dark:text-slate-600">
@@ -385,7 +450,7 @@
                 </div>
 
                 <!-- step 3: data -->
-                <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
+                <div id="training" class="glass rounded-3xl p-6 sm:p-8 space-y-4">
                     <div class="text-teal-400 font-bold uppercase tracking-widest text-xs">Step 3 · Training data</div>
                     <h3 class="text-2xl font-bold">2,528 synthetic practice chats</h3>
                     <p class="text-slate-300 dark:text-slate-600">
@@ -422,7 +487,7 @@
                 </div>
 
                 <!-- step 4: student bake-off -->
-                <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
+                <div id="students" class="glass rounded-3xl p-6 sm:p-8 space-y-4">
                     <div class="text-teal-400 font-bold uppercase tracking-widest text-xs">Step 4 · Student bake-off</div>
                     <h3 class="text-2xl font-bold">Can a small model do it out of the box? No.</h3>
                     <p class="text-slate-300 dark:text-slate-600">
@@ -445,7 +510,7 @@
                 </div>
 
                 <!-- step 5: fine-tuning -->
-                <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
+                <div id="finetune" class="glass rounded-3xl p-6 sm:p-8 space-y-4">
                     <div class="text-teal-400 font-bold uppercase tracking-widest text-xs">Step 5 · Fine-tuning (LoRA) on free GPUs</div>
                     <h3 class="text-2xl font-bold">Train, study the mistakes, fix the data, retrain</h3>
                     <p class="text-slate-300 dark:text-slate-600">
@@ -500,7 +565,7 @@
                 </div>
 
                 <!-- step 6: checker -->
-                <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
+                <div id="checker" class="glass rounded-3xl p-6 sm:p-8 space-y-4">
                     <div class="text-teal-400 font-bold uppercase tracking-widest text-xs">Step 6 · A safety net</div>
                     <h3 class="text-2xl font-bold">Can a second model catch the small model's mistakes?</h3>
                     <p class="text-slate-300 dark:text-slate-600">
@@ -522,7 +587,7 @@
                 </div>
 
                 <!-- step 7: packaging -->
-                <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
+                <div id="packaging" class="glass rounded-3xl p-6 sm:p-8 space-y-4">
                     <div class="text-teal-400 font-bold uppercase tracking-widest text-xs">Step 7 · Packaging for deployment</div>
                     <h3 class="text-2xl font-bold">Shrink it without losing accuracy</h3>
                     <p class="text-slate-300 dark:text-slate-600">
@@ -558,7 +623,7 @@
             </section>
 
             <!-- ============================== ENGINEERING ============================== -->
-            <section class="space-y-6">
+            <section id="highlights" class="space-y-6">
                 <h2 class="text-3xl font-bold">Engineering highlights</h2>
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="glass rounded-2xl p-5 space-y-2">
@@ -597,7 +662,7 @@
             </section>
 
             <!-- ============================== STACK + NEXT ============================== -->
-            <section class="grid md:grid-cols-2 gap-6">
+            <section id="stack" class="grid md:grid-cols-2 gap-6">
                 <div class="space-y-3">
                     <h2 class="text-3xl font-bold">Stack</h2>
                     <div class="flex flex-wrap gap-2 text-sm">
@@ -635,5 +700,42 @@
             </footer>
         </main>
         <script src="../projects/assets/js/projects2.js"></script>
+        <script>
+            // Sub-nav: highlight the section being read and keep its link visible in the bar on narrow screens.
+            (() => {
+                const links = [...document.querySelectorAll(".subnav a.link")];
+                const bar = document.querySelector(".subnav-links");
+                const targets = links.map((a) => document.getElementById(a.hash.slice(1)));
+                let current = null;
+                function update() {
+                    const y = 140;
+                    let idx = -1;
+                    targets.forEach((t, i) => {
+                        if (t && t.getBoundingClientRect().top <= y) idx = i;
+                    });
+                    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 2) idx = links.length - 1;
+                    const a = links[idx] || null;
+                    if (a === current) return;
+                    links.forEach((l) => l.classList.toggle("active", l === a));
+                    current = a;
+                    if (a && bar.scrollWidth > bar.clientWidth) {
+                        const r = a.getBoundingClientRect(), b = bar.getBoundingClientRect();
+                        if (r.left < b.left || r.right > b.right) bar.scrollLeft += r.left - b.left - 16;
+                    }
+                }
+                window.addEventListener("scroll", update, { passive: true });
+                window.addEventListener("resize", update);
+                // Opened with #section: styles load after the first jump and move the layout, so jump again once loaded.
+                const rejump = () => {
+                    const t = location.hash && document.getElementById(location.hash.slice(1));
+                    if (t) t.scrollIntoView({ behavior: "instant", block: "start" });
+                };
+                window.addEventListener("load", () => {
+                    setTimeout(rejump, 50);
+                    if (document.fonts) document.fonts.ready.then(() => setTimeout(rejump, 50));
+                });
+                update();
+            })();
+        </script>
     </body>
 </html>
