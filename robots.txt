@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://julianreyes.dev/aicourse-preview/sitemap-index.xml
